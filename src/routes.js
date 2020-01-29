@@ -16,167 +16,78 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Dashboard from "views/Dashboard.jsx";
-import Notifications from "views/Notifications.jsx";
-import Icons from "views/Icons.jsx";
-import Typography from "views/Typography.jsx";
-import TableList from "views/Tables.jsx";
-import Maps from "views/Map.jsx";
-import UserPage from "views/User.jsx";
-import UpgradeToPro from "views/Upgrade.jsx";
-
-// var routes = [
-//   {
-//     path: "/dashboard",
-//     name: "داشبورد",
-//     icon: "nc-icon nc-bank",
-//     component: Dashboard,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/icons",
-//     name: "ثبت کاربر جدید",
-//     icon: "nc-icon nc-diamond",
-//     component: Icons,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/maps",
-//     name: "ثبت دوره جدید",
-//     icon: "nc-icon nc-pin-3",
-//     component: Maps,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/notifications",
-//     name: "ثبت نام کاروندان",
-//     icon: "nc-icon nc-bell-55",
-//     component: Notifications,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/user-page",
-//     name: "User Profile",
-//     icon: "nc-icon nc-single-02",
-//     component: UserPage,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/tables",
-//     name: "Table List",
-//     icon: "nc-icon nc-tile-56",
-//     component: TableList,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/typography",
-//     name: "Typography",
-//     icon: "nc-icon nc-caps-small",
-//     component: Typography,
-//     layout: "/admin"
-//   },
-//   // helping nav bar
-//   {
-//     path: "/icons",
-//     name: "ثبت کاربر جدید",
-//     icon: "nc-icon nc-diamond",
-//     component: Icons,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/maps",
-//     name: "ثبت دوره جدید",
-//     icon: "nc-icon nc-pin-3",
-//     component: Maps,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/notifications",
-//     name: "ثبت نام کاروندان",
-//     icon: "nc-icon nc-bell-55",
-//     component: Notifications,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/user-page",
-//     name: "User Profile",
-//     icon: "nc-icon nc-single-02",
-//     component: UserPage,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/tables",
-//     name: "Table List",
-//     icon: "nc-icon nc-tile-56",
-//     component: TableList,
-//     layout: "/admin"
-//   },
-//   {
-//     path: "/typography",
-//     name: "Typography",
-//     icon: "nc-icon nc-caps-small",
-//     component: Typography,
-//     layout: "/admin"
-//   },
-//   // {
-//   //   pro: true,
-//   //   path: "/upgrade",
-//   //   name: "Upgrade to PRO",
-//   //   icon: "nc-icon nc-spaceship",
-//   //   component: UpgradeToPro,
-//   //   layout: "/admin"
-//   // }
-// ];
-
-// let routes = {
+// admin routes address
+import AdminDashboard from "views/admin/Dashboard.jsx";
+import AdminNotifications from "views/admin/Notifications.jsx";
+import AdminIcons from "views/admin/Icons.jsx";
+import AdminTypography from "views/admin/Typography.jsx";
+import AdminTableList from "views/admin/Tables.jsx";
+import AdminMaps from "views/admin/Map.jsx";
+import AdminUserPage from "views/admin/User.jsx";
+//teacher routes address
+import Dashboard from "views/teacher/Dashboard.jsx";
+import Notifications from "views/teacher/Notifications.jsx";
+import Icons from "views/teacher/Icons.jsx";
+import Typography from "views/teacher/Typography.jsx";
+import TableList from "views/teacher/Tables.jsx";
+import Maps from "views/teacher/Map.jsx";
+import UserPage from "views/teacher/User.jsx";
+//student routes address
+// import Dashboard from "views/student/Dashboard.jsx";
+// import Notifications from "views/student/Notifications.jsx";
+// import Icons from "views/student/Icons.jsx";
+// import Typography from "views/student/Typography.jsx";
+// import TableList from "views/student/Tables.jsx";
+// import Maps from "views/student/Map.jsx";
+// import UserPage from "views/student/User.jsx";
 export let AdminRoutes = [
     {
       path: "/dashboard",
       name: "داشبورد",
       icon: "nc-icon nc-bank",
-      component: Dashboard,
+      component: AdminDashboard,
       layout: "/admin"
     },
     {
       path: "/icons",
       name: "ثبت کاربر جدید",
       icon: "nc-icon nc-single-02",
-      component: Icons,
+      component: AdminIcons ,
       layout: "/admin"
     },
     {
       path: "/maps",
       name: "ثبت دوره جدید",
       icon: "nc-icon nc-hat-3",
-      component: Maps,
+      component:AdminMaps ,
       layout: "/admin"
     },
     {
       path: "/notifications",
       name: "ثبت نام کاروندان",
       icon: "nc-icon nc-badge",
-      component: Notifications,
+      component: AdminNotifications ,
       layout: "/admin"
     },
     {
       path: "/user-page",
       name: "User Profile",
       icon: "nc-icon nc-single-02",
-      component: UserPage,
+      component: AdminUserPage,
       layout: "/admin"
     },
     {
       path: "/tables",
       name: "Table List",
       icon: "nc-icon nc-tile-56",
-      component: TableList,
+      component: AdminTableList,
       layout: "/admin"
     },
     {
       path: "/typography",
       name: "Typography",
       icon: "nc-icon nc-caps-small",
-      component: Typography,
+      component: AdminTypography,
       layout: "/admin"
     },
   ]
@@ -282,5 +193,5 @@ export let StudentRoutes = [
     layout: "/student"
   },
 ]
-// }
+
 
