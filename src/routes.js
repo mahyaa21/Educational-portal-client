@@ -20,7 +20,7 @@
 import AdminDashboard from "views/admin/Dashboard.jsx";
 import AdminAddUser from "views/admin/addUser.jsx";
 import AdminAddCourse from "views/admin/addCourse.jsx";
-import AdminNotifications from "views/admin/Notifications.jsx";
+import AdminRegisterCourseUser from "views/admin/registerCourseUser.jsx"
 import AdminIcons from "views/admin/Icons.jsx";
 import AdminTypography from "views/admin/Typography.jsx";
 import AdminTableList from "views/admin/Tables.jsx";
@@ -64,10 +64,10 @@ export let AdminRoutes = [
       layout: "/admin"
     },
     {
-      path: "/notifications",
+      path: "/registercourseuser",
       name: "ثبت نام کاروندان",
       icon: "nc-icon nc-badge",
-      component: AdminNotifications ,
+      component: AdminRegisterCourseUser ,
       layout: "/admin"
     },
     {
