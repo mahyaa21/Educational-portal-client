@@ -19,11 +19,11 @@
 // admin routes address
 import AdminDashboard from "views/admin/Dashboard.jsx";
 import AdminAddUser from "views/admin/addUser.jsx";
+import AdminAddCourse from "views/admin/addCourse.jsx";
 import AdminNotifications from "views/admin/Notifications.jsx";
 import AdminIcons from "views/admin/Icons.jsx";
 import AdminTypography from "views/admin/Typography.jsx";
 import AdminTableList from "views/admin/Tables.jsx";
-import AdminMaps from "views/admin/Map.jsx";
 import AdminUserPage from "views/admin/User.jsx";
 //teacher routes address
 import Dashboard from "views/teacher/Dashboard.jsx";
@@ -57,10 +57,10 @@ export let AdminRoutes = [
     layout: "/admin"
   },
     {
-      path: "/maps",
+      path: "/addcourse",
       name: "ثبت دوره جدید",
       icon: "nc-icon nc-hat-3",
-      component:AdminMaps ,
+      component: AdminAddCourse ,
       layout: "/admin"
     },
     {
