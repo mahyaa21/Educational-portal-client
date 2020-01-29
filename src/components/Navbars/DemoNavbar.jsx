@@ -36,7 +36,7 @@ import {
   Input
 } from "reactstrap";
 
-import routes from "routes.js";
+import {AdminRoutes, TeacherRoutes, StudentRoutes} from "routes.js";
 
 class Header extends React.Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class Header extends React.Component {
   }
   getBrand() {
     let brandName = "Default Brand";
-    routes.map((prop, key) => {
+    TeacherRoutes.map((prop, key) => {
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
         brandName = prop.name;
       }
