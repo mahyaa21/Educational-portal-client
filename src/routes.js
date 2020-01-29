@@ -28,28 +28,28 @@ import UpgradeToPro from "views/Upgrade.jsx";
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "داشبورد",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin"
   },
   {
     path: "/icons",
-    name: "Icons",
+    name: "ثبت کاربر جدید",
     icon: "nc-icon nc-diamond",
     component: Icons,
     layout: "/admin"
   },
   {
     path: "/maps",
-    name: "Maps",
+    name: "ثبت دوره جدید",
     icon: "nc-icon nc-pin-3",
     component: Maps,
     layout: "/admin"
   },
   {
     path: "/notifications",
-    name: "Notifications",
+    name: "ثبت نام کاروندان",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
     layout: "/admin"

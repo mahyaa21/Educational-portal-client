@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'IRANYEKAN';
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular.eot');
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular.eot') format('embedded-opentype'), url('../fonts/IranYekan/woff2/iranyekanwebregular.woff2') format('woff2'), url('../fonts/IranYekan/woff/iranyekanwebregular.woff') format('woff'), url('../fonts/IranYekan/ttf/iranyekanwebregular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
 .wrapper{
     position: relative;
     top: 0;
@@ -193,7 +202,8 @@
             margin: 10px 10px;
             color: $white-color;
             line-height: 20px;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: 'IRANYEKAN' !important;
         }
 
         .simple-text{
