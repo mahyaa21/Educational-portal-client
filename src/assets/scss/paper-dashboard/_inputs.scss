@@ -10,6 +10,7 @@
     color: $font-color;
     line-height: normal;
     font-size: $font-size-base;
+    text-align: right;
     @include transition-input-focus-color();
     @include box-shadow(none);
 
@@ -270,7 +271,7 @@
 .form-group{
     margin-bottom: 10px;
     position: relative;
-
+    text-align: right;
     .form-control-static{
         margin-top: 9px;
     }
@@ -400,4 +401,8 @@ textarea.form-control{
     .form-check-inline{
         margin-top: 6px;
     }
+}
+
+select{
+  direction: rtl;
 }

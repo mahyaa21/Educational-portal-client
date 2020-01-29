@@ -18,6 +18,7 @@
 */
 // admin routes address
 import AdminDashboard from "views/admin/Dashboard.jsx";
+import AdminAddUser from "views/admin/addUser.jsx";
 import AdminNotifications from "views/admin/Notifications.jsx";
 import AdminIcons from "views/admin/Icons.jsx";
 import AdminTypography from "views/admin/Typography.jsx";
@@ -47,14 +48,14 @@ export let AdminRoutes = [
       icon: "nc-icon nc-bank",
       component: AdminDashboard,
       layout: "/admin"
-    },
-    {
-      path: "/icons",
-      name: "ثبت کاربر جدید",
-      icon: "nc-icon nc-single-02",
-      component: AdminIcons ,
-      layout: "/admin"
-    },
+  },
+  {
+    path: "/addUser",
+    name: "ثبت کاربر جدید",
+    icon: "nc-icon nc-single-02",
+    component: AdminAddUser ,
+    layout: "/admin"
+  },
     {
       path: "/maps",
       name: "ثبت دوره جدید",
@@ -89,7 +90,14 @@ export let AdminRoutes = [
       icon: "nc-icon nc-caps-small",
       component: AdminTypography,
       layout: "/admin"
-    },
+  },
+  {
+    path: "/icons",
+    name: "ثبت کاربر جدید",
+    icon: "nc-icon nc-single-02",
+    component: AdminIcons ,
+    layout: "/admin"
+  },
   ]
 export let TeacherRoutes = [
   {
