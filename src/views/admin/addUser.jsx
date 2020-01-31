@@ -17,7 +17,10 @@
 
 */
 import React from "react";
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { registerUser } from '../../redux/_actions/authentication';
 // reactstrap components
 import {
     Button,
@@ -34,6 +37,51 @@ import {
 } from "reactstrap";
 
 class addUser extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName:'',
+            email: '',
+            password: '',
+            password_confirm: '',
+            role: '',
+            users: [],
+            errors: {}
+            
+        }
+    }
+
+    handleInputChange = (e) => {
+        console.log(e)
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { users } = this.state;
+        const user = {
+            name: this.state.firstName + this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirm: this.state.password_confirm,
+            role: this.state.role
+        }
+        this.setState({ users: [...users, user] });
+        this.props.registerUser(user, this.props.history);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     render() {
         return (
             <>
@@ -45,52 +93,51 @@ class addUser extends React.Component {
                                     <CardTitle tag="h5">ثبت کاربر جدید</CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form>
+                                    <Form onSubmit={this.handleSubmit}>
 
                                         <Row>
-                                        <Col className="pr-1" md="4">
+                                        <Col className="pr-1" md="6">
                                                 <FormGroup>
                                                     <label>نام خانوادگی</label>
                                                     <Input
+                                                        name="lastName"
                                                         placeholder="نام خانوادگی"
                                                         type="text"
+                                                        defaultValue={this.state.lastName}
+                                                        onChange={this.handleInputChange}
                                                     />
                                                 </FormGroup>
                                             </Col>
-                                            <Col className="pl-1 pr-1" md="4">
+                                            <Col className="pl-1 " md="6">
                                                 <FormGroup>
                                                     <label>نام</label>
                                                     <Input
+                                                        name="firstName"
                                                         placeholder="نام"
                                                         type="text"
+                                                        defaultValue={this.state.firstName}
+                                                        onChange={this.handleInputChange}
                                                     />
-                                                </FormGroup>
-                                            </Col>
-                                            
-                                            <Col className="pl-1" md="4">
-                                                <FormGroup>
-                                                    <label>نام کاربری</label>
-                                                    <Input
-                                                        
-                                                        placeholder="نام کاربری"
-                                                        type="text"
-                                                    />
+                                                    {this.state.errors.name && (<div className="validation-text">{this.state.errors.name}</div>)}
                                                 </FormGroup>
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col className="pr-1" md="6">
                                                 <FormGroup>
-                                                    <label htmlFor="exampleInputEmail1">
+                                                    <label>
                                                         آدرس ایمیل
                                                     </label>
-                                                    <Input placeholder="ایمیل" type="email" />
+                                                    <Input name="email" placeholder="ایمیل" type="email" defaultValue={this.state.email} onChange={this.handleInputChange} />
+                                                    {this.state.errors.email && (<div className="validation-text">{this.state.errors.email}</div>)}
                                                 </FormGroup>
                                             </Col>
                                             <Col className="pl-1" md="6">
                                                 <FormGroup>
-                                                    <label htmlfor="exampleSelect">نوع کاربر</label>
-                                                    <Input type="select" name="select" id="exampleSelect">
+                                                    <label>نوع کاربر</label>
+                                                    <Input type="select" name="role" id="role" defaultValue={this.state.role} onChange={this.handleInputChange}>
+                                                    
+                                                        <option>--انتخاب سمت--</option>
                                                         <option>مدیر</option>
                                                         <option>استاد</option>
                                                         <option>کاروند</option>
@@ -98,6 +145,27 @@ class addUser extends React.Component {
                                                 </FormGroup>
                                             </Col>
 
+                                        </Row>
+                                        <Row>
+                                        <Col className="pr-1" md="6">
+                                                <FormGroup>
+                                                    <label>
+                                                       تکرار رمز عبور
+                                                    </label>
+                                                    <Input name="password_confirm" placeholder="تکرار رمز عبور" type="password" defaultValue={this.state.password_confirm} onChange={this.handleInputChange} />
+                                                    {this.state.errors.password_confirm && (<div className="validation-text">{this.state.errors.password_confirm}</div>)}
+                                                </FormGroup>
+                                            </Col>
+                                        <Col className="pl-1" md="6">
+                                                <FormGroup>
+                                                    <label>
+                                                        رمز عبور
+                                                    </label>
+                                                    <Input name="password" placeholder="رمز عبور" type="password" defaultValue={this.state.password} onChange={this.handleInputChange}/>
+                                                    {this.state.errors.password && (<div className="validation-text">{this.state.errors.password}</div>)}
+                                                </FormGroup>
+                                            </Col>
+                                            
                                         </Row>
                                         <Row>
                                             <div className="update ml-auto mr-auto">
@@ -121,4 +189,15 @@ class addUser extends React.Component {
     }
 }
 
-export default addUser;
+addUser.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    errors: state.errors,
+    auth: state.auth,
+    courseStatus: state.courseStatus
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(addUser))
