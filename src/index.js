@@ -37,7 +37,7 @@ import setAuthToken from './setAuthToken';
 import { setCurrentUser,logoutUser } from './redux/_actions/authentication';
 import store from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
-import { localeSet } from './redux/_actions/locale';
+// import { localeSet } from './redux/_actions/locale';
 
 const hist = createBrowserHistory();
 

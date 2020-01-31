@@ -17,7 +17,11 @@
 
 */
 import React from "react";
-
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+// import { getTeachers } from '../../services/apiClient';
+import { withApiClient } from '../../services/withApiCLient';
 // reactstrap components
 import {
     Button,
@@ -34,6 +38,53 @@ import {
 } from "reactstrap";
 
 class addCourse extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            status: '',
+            teacher: '',
+            teachers: [],
+            courses: [],
+            errors: {}
+        }
+    }
+
+    componentDidMount() {
+        this.props.apiClient.getTeachers()
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    teachers:[...res]
+                })
+            }).catch(err => {
+                console.log(err)
+            });
+        
+    }
+    onChangeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    }
+
+    SubmiHandler = (e) => {
+        e.preventDefault();
+        let course = {
+            name: this.state.name,
+            teacher: this.state.teacher
+        }
+        console.log('cousre',course)
+        this.props.apiClient.saveCourse(course)
+            .then(res => {
+                console.log(res)
+            alert('دوره با موفقیت ثبت شد')
+            })
+            .catch(err => {
+                console.log(err);
+        })
+    }
     render() {
         return (
             <>
@@ -45,15 +96,16 @@ class addCourse extends React.Component {
                                     <CardTitle tag="h5">ثبت دوره جدید</CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form>
+                                    <Form onSubmit={this.SubmiHandler}>
                                         <Row className="mt-2">
                                         <Col className="pr-1" md="6">
                                                 <FormGroup>
                                                     <label htmlfor="exampleSelect">مدرس دوره</label>
-                                                    <Input type="select" name="select" id="exampleSelect">
-                                                        <option>مدیر</option>
-                                                        <option>استاد</option>
-                                                        <option>کاروند</option>
+                                                    <Input type="select" name="teacher" id="exampleSelect" onChange={this.onChangeHandler}>
+                                                        <option>نام مدرس را انتخاب کنید</option>
+                                                        {this.state.teachers.map((teacher)=>{
+                                                            return<option key={teacher.id} value={teacher.name}> {teacher.name} </option>
+                                                        })}
                                                     </Input>
                                                 </FormGroup>
                                             </Col>
@@ -62,7 +114,7 @@ class addCourse extends React.Component {
                                                     <label htmlFor="exampleInputEmail1">
                                                         نام دوره
                                                     </label>
-                                                    <Input placeholder="نام دوره" type="email" />
+                                                    <Input placeholder="نام دوره" type="text" name="name" value={this.state.name} onChange={this.onChangeHandler}/>
                                                 </FormGroup>
                                             </Col>
                                             
@@ -90,4 +142,14 @@ class addCourse extends React.Component {
     }
 }
 
-export default addCourse;
+// RegisterCourse.propTypes = {
+//     registerCourse: PropTypes.func.isRequired,
+//    // resStatus: PropTypes.object.isRequired
+// };
+
+// const mapStateToProps = state => ({
+//     errors: state.errors,
+//     courseStatus: state.courseStatus
+// });
+
+export default withApiClient(withRouter(addCourse))
