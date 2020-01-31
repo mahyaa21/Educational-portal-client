@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'IRANYEKAN';
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular.eot');
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular.eot') format('embedded-opentype'), url('../fonts/IranYekan/woff2/iranyekanwebregular.woff2') format('woff2'), url('../fonts/IranYekan/woff/iranyekanwebregular.woff') format('woff'), url('../fonts/IranYekan/ttf/iranyekanwebregular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.course-info{
+    font-family: 'IRANYEKAN';
+    direction: rtl;
+    text-decoration: none;
+    text-align: right;
+    list-style-type: none;
+    & > li{
+        margin: 22px 0px;
+    }
+}

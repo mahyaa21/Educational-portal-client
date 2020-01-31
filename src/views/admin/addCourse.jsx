@@ -104,7 +104,7 @@ class addCourse extends React.Component {
                                                     <Input type="select" name="teacher" id="exampleSelect" onChange={this.onChangeHandler}>
                                                         <option>نام مدرس را انتخاب کنید</option>
                                                         {this.state.teachers.map((teacher)=>{
-                                                            return<option key={teacher.id} value={teacher.name}> {teacher.name} </option>
+                                                            return<option key={teacher.id} value={teacher._id}> {teacher.name} </option>
                                                         })}
                                                     </Input>
                                                 </FormGroup>
