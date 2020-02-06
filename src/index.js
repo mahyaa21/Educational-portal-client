@@ -27,6 +27,8 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 import AdminLayout from "layouts/Admin.jsx";
+import StudentLayout from 'layouts/Student';
+import TeacherLayout from 'layouts/Teacher';
 
 import { Provider } from 'react-redux';
 // import './index.css';
@@ -60,6 +62,12 @@ ReactDOM.render(
         <Switch>
           <Route path="/admin" render={props => <AdminLayout {...props} />} />
           <Redirect to="/admin/dashboard" />
+
+          <Route path="/student" render={props => <StudentLayout {...props} />} />
+          <Redirect to="/student/dashboard" />
+
+          <Route path="/teacher" render={props => <TeacherLayout {...props} />} />
+          <Redirect to="/teacher/dashboard" />
         </Switch>
       </Router>
     </Provider>

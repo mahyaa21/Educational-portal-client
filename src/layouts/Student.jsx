@@ -26,7 +26,7 @@ import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
-import {AdminRoutes} from "routes.js";
+import { StudentRoutes} from "routes.js";
 
 var ps;
 
@@ -68,14 +68,14 @@ class Dashboard extends React.Component {
       <div className="wrapper">
         <Sidebar
           {...this.props}
-          routes={AdminRoutes}
+          routes={StudentRoutes}
           bgColor={this.state.backgroundColor}
           activeColor={this.state.activeColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
           <DemoNavbar {...this.props} />
           <Switch>
-            {AdminRoutes.map((prop, key) => {
+            {StudentRoutes.map((prop, key) => {
               return (
                 <Route
                   path={prop.layout + prop.path}
