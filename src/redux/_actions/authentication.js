@@ -26,7 +26,7 @@ export const registerUser = (user,history) => dispatch => {
 
 
 export const loginUser = (user,history) => dispatch => {
-    axios.post('/api/users/login', user)
+    axios.post('http://localhost:3000/api/users/login', user)
             .then(res => {
                 const { token,role } = res.data;
                 localStorage.setItem('jwtToken', token);
@@ -42,13 +42,13 @@ export const loginUser = (user,history) => dispatch => {
                 switch(role){
                     
                     case 'student':
-                        history.push('/student');
+                        history.push('/student/dashboard');
                         break;
                     case 'teacher':
-                        history.push('/teacher');
+                        history.push('/teacher/dashboard');
                         break;
                     case 'admin':
-                        history.push("/dashboard");
+                        history.push("/admin/dashboard");
                         break;
                     default:
                         alert('you are not registerd!')   

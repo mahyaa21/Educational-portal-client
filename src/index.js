@@ -18,17 +18,15 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
-import { Router,Route,Switch,Redirect } from "react-router-dom";
+
+
 
 import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/paper-dashboard.scss?v=1.1.0";
 import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
-import AdminLayout from "layouts/Admin.jsx";
-import StudentLayout from 'layouts/Student';
-import TeacherLayout from 'layouts/Teacher';
+import App from './app';
 
 import { Provider } from 'react-redux';
 // import './index.css';
@@ -41,7 +39,7 @@ import store from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 // import { localeSet } from './redux/_actions/locale';
 
-const hist = createBrowserHistory();
+
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -58,18 +56,7 @@ if (localStorage.jwtToken) {
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Router history={hist}>
-        <Switch>
-          <Route path="/admin" render={props => <AdminLayout {...props} />} />
-          <Redirect to="/admin/dashboard" />
-
-          <Route path="/student" render={props => <StudentLayout {...props} />} />
-          <Redirect to="/student/dashboard" />
-
-          <Route path="/teacher" render={props => <TeacherLayout {...props} />} />
-          <Redirect to="/teacher/dashboard" />
-        </Switch>
-      </Router>
+      <App/>
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")

@@ -33,6 +33,7 @@ import Typography from "views/teacher/Typography.jsx";
 import TableList from "views/teacher/Tables.jsx";
 import Maps from "views/teacher/Map.jsx";
 import UserPage from "views/teacher/User.jsx";
+import LoginPage from "views/login/login.jsx";
 //student routes address
 // import Dashboard from "views/student/Dashboard.jsx";
 // import Notifications from "views/student/Notifications.jsx";
@@ -202,4 +203,11 @@ export let StudentRoutes = [
   },
 ]
 
+export let LoginRoute = {
+  path: "/",
+  name: "Typography",
+  icon: "nc-icon nc-caps-small",
+  component: LoginPage,
+  layout: "/login"
+}
 
