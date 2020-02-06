@@ -47,6 +47,10 @@ class CourseList extends React.Component {
     }
     componentDidMount() {
 
+        this.getAllcourses()
+
+    }
+    getAllcourses = () => {
         this.props.apiClient.getCourses()
             .then(res => {
                 this.setState({
@@ -56,7 +60,6 @@ class CourseList extends React.Component {
             .catch(err => {
                 console.log(err)
             })
-
     }
     showMembers = (course) => {
         this.setState({
@@ -104,7 +107,7 @@ class CourseList extends React.Component {
             <>
                 <div className="content">
                     {this.state.showClass && <Row>
-                        <Col md="12"><CourseInfo members={this.state.courseMembers} NotMember={this.state.NotMember} teacher={this.state.teacher} date={this.state.date} course={this.state.course} /></Col>
+                        <Col md="12"><CourseInfo getcourse={this.getAllcourses} members={this.state.courseMembers} NotMember={this.state.NotMember} teacher={this.state.teacher} date={this.state.date} course={this.state.course} /></Col>
                         <Col md="2"><Button color='primary' onClick={this.goBack}>بازگشت</Button></Col>
                     </Row>}
                     {!this.state.showClass && <Row>

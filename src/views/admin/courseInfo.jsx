@@ -17,7 +17,7 @@
 
 */
 import React from "react";
-
+import { withApiClient } from '../../services/withApiCLient';
 // reactstrap components
 import {
     Card,
@@ -40,6 +40,19 @@ class courseInfo extends React.Component {
             unRegcheckBoxStatus:false
         }
     }
+
+    finishCourse = (id) => {
+        this.props.apiClient.finishCourse(id)
+            .then(res => {
+                alert('ویرایش انجام شد');
+                this.props.getcourse()
+            })
+            .catch(err => {
+            console.log(err)
+        })
+    }
+
+
     onChangeHandler = (e,member) => {
         e.preventDefault()
         
@@ -71,14 +84,14 @@ class courseInfo extends React.Component {
                                         <li>نام دوره : <span>{this.props.course.name}</span></li>
                                         <li>نام مدرس : <span>{this.props.teacher.name}</span></li>
                                         <li>تاریخ برگزاری : <span>{this.props.course.date}</span></li>
-                                        <li><Button color="danger">اتمام دوره</Button></li>
+                                        <li><Button color="danger" onClick={()=>this.finishCourse(this.props.course._id)}>اتمام دوره</Button></li>
                                     </ul>
                                 </CardBody>
                             </Card>
                         </Col>
                     </Row>
                     <Row>
-                        <Col md="12">
+                        <Col md="12" style={{ textAlign: 'right' }}>
                             <Card>
                                 <CardHeader>
                                     <CardTitle tag="h4">لیست کاروندان</CardTitle>
@@ -89,25 +102,24 @@ class courseInfo extends React.Component {
                                             <tr>
                                                 <th>نام</th>
                                                 <th>ایمیل</th>   
-                                                <th>City</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.props.members.map(member => {
+                                            {this.props.members && this.props.members.map(member => {
                                                 return <tr>
                                                     <td>{member.name}</td>
                                                     <td>{member.email}</td>
-                                                    <td><input type="checkbox" name="registerMembers" onChange={(e) => this.onChangeHandler(e,member)}  checked={member.enrolledClass== 'name'} /></td>
+                                                    {/* <td><input type="checkbox" name="registerMembers" onChange={(e) => this.onChangeHandler(e,member)}  checked={member.enrolledClass== 'name'} /></td> */}
                                                 </tr>
                                             })}
-                                            {this.props.NotMember.map(member => {
+                                            {/* {this.props.NotMember && this.props.NotMember.map(member => {
                                                 return <tr>
                                                 <td>{member.name}</td>
                                                 <td>{member.email}</td>
                                                 <td><input type="checkbox" name="unregisterMembers" onChange={(e)=>this.onChangeHandler(e,member)}  /></td>
                                             </tr>
-                                            })}
+                                            })} */}
                                         </tbody>
                                     </Table>
                                 </CardBody>
@@ -120,4 +132,4 @@ class courseInfo extends React.Component {
     }
 }
 
-export default courseInfo;
+export default withApiClient(courseInfo);

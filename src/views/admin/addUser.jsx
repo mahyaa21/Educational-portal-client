@@ -100,9 +100,20 @@ class addUser extends React.Component {
             role: this.state.role,
             course: this.state.course
         }
+        const courseUser = {
+            student: this.state.firstName + " " + this.state.lastName,
+            course: this.state.course
+        }
         
         this.props.registerUser(user,this.props.history);
-        this.setState({ users: [...users,user] });
+        this.props.apiClient.RegisterCourseUser(courseUser)
+            .then(res => {
+            alert('کاربر بت موفقیت ثبت شد')
+            })
+        .catch (err=> {
+            console.log(err)
+        })
+        // this.setState({ users: [...users,user] });
     }
 
     componentWillReceiveProps(nextProps) {
