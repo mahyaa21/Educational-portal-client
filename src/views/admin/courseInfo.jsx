@@ -52,26 +52,6 @@ class courseInfo extends React.Component {
         })
     }
 
-
-    onChangeHandler = (e,member) => {
-        e.preventDefault()
-        
-        console.log(e)
-        console.log(member);
-        if (e.target.name === 'unregisterMembers') {
-            // const { register } = this.state;
-            // e.target.checked = true;
-            // this.setState({
-            //     register: [...register,member]
-            // })
-        } else if (e.target.name === 'registerMembers') {
-            // const { unregister } = this.state;
-            // e.target.checked = false;
-            // this.setState({
-            //     unregister: [...unregister,member]
-            // })
-        }
-    }
     render() {
         return (
             <>
@@ -110,16 +90,8 @@ class courseInfo extends React.Component {
                                                 return <tr>
                                                     <td>{member.name}</td>
                                                     <td>{member.email}</td>
-                                                    {/* <td><input type="checkbox" name="registerMembers" onChange={(e) => this.onChangeHandler(e,member)}  checked={member.enrolledClass== 'name'} /></td> */}
                                                 </tr>
                                             })}
-                                            {/* {this.props.NotMember && this.props.NotMember.map(member => {
-                                                return <tr>
-                                                <td>{member.name}</td>
-                                                <td>{member.email}</td>
-                                                <td><input type="checkbox" name="unregisterMembers" onChange={(e)=>this.onChangeHandler(e,member)}  /></td>
-                                            </tr>
-                                            })} */}
                                         </tbody>
                                     </Table>
                                 </CardBody>
