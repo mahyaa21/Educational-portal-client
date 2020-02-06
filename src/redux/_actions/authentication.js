@@ -83,7 +83,7 @@ export const logoutUser = (history) => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     if(history){
-        history.push('/');
+        history.push('/login');
     }
     
 }

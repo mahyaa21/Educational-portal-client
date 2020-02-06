@@ -19,7 +19,8 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch ,withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
@@ -40,6 +41,10 @@ class Dashboard extends React.Component {
     this.mainPanel = React.createRef();
   }
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push('/login');
+      alert('ابتدا وارد شوید')
+  } 
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.mainPanel.current);
       document.body.classList.toggle("perfect-scrollbar-on");
@@ -98,4 +103,9 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth,
+  courseStatus: state.courseStatus
+});
+export default connect(mapStateToProps)(withRouter(Dashboard));

@@ -33,18 +33,23 @@ import {
   InputGroup,
   InputGroupText,
   InputGroupAddon,
-  Input
+  Input,
+  Tooltip,
+
 } from "reactstrap";
 
 import {AdminRoutes, TeacherRoutes, StudentRoutes} from "routes.js";
-
+import { connect } from 'react-redux';
+import { logoutUser } from 'redux/_actions/authentication';
+import { withRouter } from 'react-router-dom';
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      color: "transparent"
+      color: "transparent",
+      tooltipOpen:false
     };
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
@@ -64,6 +69,19 @@ class Header extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  toggleOpenTooltip = () => {
+    this.setState({
+    tooltipOpen: !this.state.tooltipOpen
+  });
+  }
+
+  onLogout(e) {
+    e.preventDefault();
+    this.props.logoutUser(this.props.history);
+}
+
+
   dropdownToggle(e) {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
@@ -188,10 +206,14 @@ class Header extends React.Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <Link to="#pablo" className="nav-link btn-rotate">
-                  <i className="nc-icon nc-settings-gear-65" />
+                <Link to="#pablo" className="nav-link btn-rotate" onClick={this.onLogout.bind(this)}>
+                <i className="nc-icon nc-button-power" id="exitTooltip" style={{ color:'red' }} />
+                <Tooltip placement="bottom" className="bg-light" isOpen={this.state.tooltipOpen} autohide={false} target="exitTooltip" toggle={this.toggleOpenTooltip}>
+                  خروج
+                </Tooltip>
+                  
                   <p>
-                    <span className="d-lg-none d-md-block">Account</span>
+                    <span className="d-lg-none d-md-block">خروج</span>
                   </p>
                 </Link>
               </NavItem>
@@ -202,5 +224,8 @@ class Header extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
 
-export default Header;
+export default connect(mapStateToProps, { logoutUser })(withRouter(Header));
