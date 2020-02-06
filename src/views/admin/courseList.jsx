@@ -123,8 +123,7 @@ class CourseList extends React.Component {
                                                 <th>نام دوره</th>
                                                 <th>وضعیت</th>
                                                 <th>تاریخ شروع برگزاری</th>
-                                                <th>نمایش اعضا</th>
-                                                <th>ویرایش</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -134,8 +133,8 @@ class CourseList extends React.Component {
                                                     <td>{course.name}</td>
                                                     <td>{(course.status == 'I') ?<Badge color="warning">درحال برگزاری...</Badge>  : <Badge color="danger">به پایان رسیده</Badge>}</td>
                                                     <td>{course.date}</td>
-                                                    <td><Button color="primary" onClick={()=>{ this.showMembers(course) }}>اعضا</Button></td>
-                                                    <td><Button color="warning">ویرایش</Button></td>
+                                                    <td><Button color="primary" onClick={()=>{ this.showMembers(course) }}>جزئیات بیشتر</Button></td>
+                                                    
                                                 </tr>
                                             })}
 

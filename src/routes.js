@@ -72,34 +72,6 @@ export let AdminRoutes = [
       component: AdminCourseList ,
       layout: "/admin"
     },
-    {
-      path: "/user-page",
-      name: "User Profile",
-      icon: "nc-icon nc-single-02",
-      component: AdminUserPage,
-      layout: "/admin"
-    },
-    {
-      path: "/tables",
-      name: "Table List",
-      icon: "nc-icon nc-tile-56",
-      component: AdminTableList,
-      layout: "/admin"
-    },
-    {
-      path: "/typography",
-      name: "Typography",
-      icon: "nc-icon nc-caps-small",
-      component: AdminTypography,
-      layout: "/admin"
-  },
-  {
-    path: "/icons",
-    name: "ثبت کاربر جدید",
-    icon: "nc-icon nc-single-02",
-    component: AdminIcons ,
-    layout: "/admin"
-  },
   ]
 export let TeacherRoutes = [
   {
