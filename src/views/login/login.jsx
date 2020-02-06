@@ -77,7 +77,7 @@ class addUser extends React.Component {
     render() {
         return (
             <div className='login-page'>
-                <div className="content">
+                <div className="content-center" >
                     <Row>
                         <Col md="4" sm="8" className=" m-auto">
                             <Card className="card-user">

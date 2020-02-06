@@ -7,7 +7,7 @@ export const registerUser = (user,history) => dispatch => {
     console.log(user)
     axios.post('http://localhost:3000/api/users/register', user)
             .then(res => {
-                 alert('user successfully added');
+                 alert('کاربر با موفقیت ثبت نام شد');
                  console.log(res.status);
                 if(res.status === 200){
                     dispatch(setCourse('Ok'))

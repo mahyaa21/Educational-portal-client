@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../redux/_actions/authentication';
+import { withApiClient } from '../../services/withApiCLient';
 // reactstrap components
 import {
     Button,
@@ -32,7 +33,9 @@ import {
     Form,
     Input,
     Row,
-    Col
+    Col,
+    Collapse,
+    Table
 } from "reactstrap";
 
 class addUser extends React.Component {
@@ -40,22 +43,36 @@ class addUser extends React.Component {
         super(props);
         this.state = {
             firstName: '',
-            lastName:'',
+            lastName: '',
             email: '',
             password: '',
             password_confirm: '',
             role: '',
+            course:'',
             users: [],
+            courses:[],
             errors: {}
-            
+
         }
     }
 
     handleInputChange = (e) => {
-        console.log(e)
+        console.log(e.target)
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
+        })
+    }
+    componentDidMount() {
+        this.props.apiClient.getCourses()
+            .then(res => {
+                this.setState({
+                courses:[...res]
+                })
+                  
+            })
+            .catch(err => {
+                console.log(err);
         })
     }
 
@@ -67,10 +84,12 @@ class addUser extends React.Component {
             email: this.state.email,
             password: this.state.password,
             password_confirm: this.state.password_confirm,
-            role: this.state.role
+            role: this.state.role,
+            course: this.state.course
         }
-        this.setState({ users: [...users, user] });
-        this.props.registerUser(user, this.props.history);
+        
+        this.props.registerUser(user,this.props.history);
+        this.setState({ users: [...users,user] });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -79,6 +98,37 @@ class addUser extends React.Component {
                 errors: nextProps.errors
             });
         }
+    }
+
+    Addedusers = () => {
+        const { users } = this.state;
+        return <><Col md="12">
+        <Card>
+          <CardHeader>
+            <CardTitle tag="h4">Simple Table</CardTitle>
+          </CardHeader>
+          <CardBody>
+            <Table responsive>
+              <thead className="text-primary">
+                <tr>
+                  <th>Name</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th className="text-right">Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dakota Rice</td>
+                  <td>Niger</td>
+                  <td>Oud-Turnhout</td>
+                  <td className="text-right">$36,738</td>
+                </tr>
+              </tbody>
+            </Table>
+          </CardBody>
+        </Card>
+      </Col></>
     }
 
     render() {
@@ -95,7 +145,7 @@ class addUser extends React.Component {
                                     <Form onSubmit={this.handleSubmit}>
 
                                         <Row>
-                                        <Col className="pr-1" md="6">
+                                            <Col className="pr-1" md="6">
                                                 <FormGroup>
                                                     <label>نام خانوادگی</label>
                                                     <Input
@@ -135,36 +185,51 @@ class addUser extends React.Component {
                                                 <FormGroup>
                                                     <label>نوع کاربر</label>
                                                     <Input type="select" name="role" id="role" defaultValue={this.state.role} onChange={this.handleInputChange}>
-                                                    
+
                                                         <option>--انتخاب سمت--</option>
                                                         <option>مدیر</option>
                                                         <option>استاد</option>
                                                         <option>کاروند</option>
                                                     </Input>
+
                                                 </FormGroup>
                                             </Col>
-
                                         </Row>
                                         <Row>
-                                        <Col className="pr-1" md="6">
+                                            <Col md='12'>  {(this.state.role === 'کاروند') ?
+                                                <Collapse isOpen={true}>
+                                                    <FormGroup>
+                                                        <label>انتخاب نام دوره</label>
+                                                        <Input type="select" name="course" id="course" onChange={this.handleInputChange}>
+
+                                                            <option>--انتخاب سمت--</option>
+                                                            {this.state.courses.map(course => {
+                                                                return <option value={course.id}>{course.name}</option>
+                                                            })}
+                                                        </Input>
+                                                    </FormGroup>
+                                                </Collapse> : ''}</Col>
+                                        </Row>
+                                        <Row>
+                                            <Col className="pr-1" md="6">
                                                 <FormGroup>
                                                     <label>
-                                                       تکرار رمز عبور
+                                                        تکرار رمز عبور
                                                     </label>
                                                     <Input name="password_confirm" placeholder="تکرار رمز عبور" type="password" defaultValue={this.state.password_confirm} onChange={this.handleInputChange} />
                                                     {this.state.errors.password_confirm && (<div className="validation-text">{this.state.errors.password_confirm}</div>)}
                                                 </FormGroup>
                                             </Col>
-                                        <Col className="pl-1" md="6">
+                                            <Col className="pl-1" md="6">
                                                 <FormGroup>
                                                     <label>
                                                         رمز عبور
                                                     </label>
-                                                    <Input name="password" placeholder="رمز عبور" type="password" defaultValue={this.state.password} onChange={this.handleInputChange}/>
+                                                    <Input name="password" placeholder="رمز عبور" type="password" defaultValue={this.state.password} onChange={this.handleInputChange} />
                                                     {this.state.errors.password && (<div className="validation-text">{this.state.errors.password}</div>)}
                                                 </FormGroup>
                                             </Col>
-                                            
+
                                         </Row>
                                         <Row>
                                             <div className="update ml-auto mr-auto">
@@ -173,7 +238,7 @@ class addUser extends React.Component {
                                                     color="primary"
                                                     type="submit"
                                                 >
-                                                   ثبت کاربر
+                                                    ثبت کاربر
                         </Button>
                                             </div>
                                         </Row>
@@ -181,6 +246,9 @@ class addUser extends React.Component {
                                 </CardBody>
                             </Card>
                         </Col>
+                    </Row>
+                    <Row>
+                        {this.Addedusers()}
                     </Row>
                 </div>
             </>
@@ -199,4 +267,4 @@ const mapStateToProps = state => ({
     courseStatus: state.courseStatus
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(addUser))
+export default connect(mapStateToProps,{ registerUser })(withApiClient(withRouter(addUser)));
