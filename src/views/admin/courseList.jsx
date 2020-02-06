@@ -111,7 +111,7 @@ class CourseList extends React.Component {
                         <Col md="2"><Button color='primary' onClick={this.goBack}>بازگشت</Button></Col>
                     </Row>}
                     {!this.state.showClass && <Row>
-                        <Col md="12">
+                        <Col md="12" style={{ textAlign: 'right' }}>
                             <Card>
                                 <CardHeader>
                                     <CardTitle tag="h4">لیست دوره ها</CardTitle>
