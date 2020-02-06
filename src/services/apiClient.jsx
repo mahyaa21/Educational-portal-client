@@ -72,6 +72,16 @@ export const apiClient = {
 
         })
     },
-    
+    ////get homeworks
+    GetHomeWorks(TeacherId) {
+        
+        return new Promise((resolve,reject) => {
+            Axios.get(`http://localhost:3000/api/users/homeworks`)
+                .then(res => res.data)
+                .then(resolve)
+                .catch(err => err)
+
+        })
+    },
 
 }   
