@@ -29,7 +29,8 @@ import {
     Table,
     Row,
     Col,
-    Button
+    Button,
+    Badge
 } from "reactstrap";
 
 class CourseList extends React.Component {
@@ -128,7 +129,7 @@ class CourseList extends React.Component {
                                             {this.state.courses.map(course => {
                                                 return <tr>
                                                     <td>{course.name}</td>
-                                                    <td>{(course.status == 'I') ? "درحال برگزاری" : "به پایان رسیده"}</td>
+                                                    <td>{(course.status == 'I') ?<Badge color="warning">درحال برگزاری...</Badge>  : <Badge color="danger">به پایان رسیده</Badge>}</td>
                                                     <td>{course.date}</td>
                                                     <td><Button color="primary" onClick={()=>{ this.showMembers(course) }}>اعضا</Button></td>
                                                     <td><Button color="warning">ویرایش</Button></td>

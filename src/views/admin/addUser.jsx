@@ -64,6 +64,7 @@ class addUser extends React.Component {
         })
     }
     componentDidMount() {
+        this.getAllUser();
         this.props.apiClient.getCourses()
             .then(res => {
                 this.setState({
@@ -76,11 +77,23 @@ class addUser extends React.Component {
         })
     }
 
+    getAllUser = () => {
+        this.props.apiClient.getUsers()
+        .then(res => {
+            this.setState({
+            users: [...res.data]
+        })
+        })
+        .catch(err => {
+            console.log(err);
+    })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         const { users } = this.state;
         const user = {
-            name: this.state.firstName + this.state.lastName,
+            name: this.state.firstName + " " + this.state.lastName,
             email: this.state.email,
             password: this.state.password,
             password_confirm: this.state.password_confirm,
@@ -100,30 +113,45 @@ class addUser extends React.Component {
         }
     }
 
+    deleteUser = (id) => {
+        this.props.apiClient.deleteUser(id)
+            .then(res => {
+                if (res.status === 200) {
+                    console.log('کاربر با موفقیت حذف شد');
+                    this.getAllUser();
+            }
+            })
+            .catch(err => {
+                console.log(err);
+        })
+    }
+
     Addedusers = () => {
         const { users } = this.state;
-        return <><Col md="12">
+        return <><Col md="8" className='m-auto' style={{ textAlign: 'right' }}>
         <Card>
           <CardHeader>
-            <CardTitle tag="h4">Simple Table</CardTitle>
+            <CardTitle tag="h4">کاربران ثبت نام شده</CardTitle>
           </CardHeader>
           <CardBody>
             <Table responsive>
               <thead className="text-primary">
                 <tr>
-                  <th>Name</th>
-                  <th>Country</th>
-                  <th>City</th>
-                  <th className="text-right">Salary</th>
+                  <th>اسم</th>
+                  <th>ایمیل</th>
+                  <th>سمت</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Dakota Rice</td>
-                  <td>Niger</td>
-                  <td>Oud-Turnhout</td>
-                  <td className="text-right">$36,738</td>
-                </tr>
+                  
+                            {this.state.users.map(user => {
+                                return <tr><td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td><Button color='danger' onClick={()=>this.deleteUser(user._id)}>حذف</Button></td>
+                                </tr>
+                            })}
+                
               </tbody>
             </Table>
           </CardBody>

@@ -2,6 +2,26 @@ import Axios from 'axios';
 
 export const apiClient = {
 
+    //Get all users
+    getUsers() {
+        return new Promise((resolve,reject) => {
+            Axios.get('http://localhost:3000/api/users')
+                .then(res => res)
+                .then(resolve)
+                .catch(err=>err)
+      })  
+    },
+
+    //delete user
+    deleteUser  (id) {
+        return new Promise((resolve,reject) => {
+            Axios.get(`http://localhost:3000/api/users/delete/${id}`)
+                .then(res => res)
+                .then(resolve)
+                .catch(err=>err)
+      }) 
+    },
+
     //GET teacher list
     getTeachers() {
         return new Promise((resolve,reject) => {
