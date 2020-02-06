@@ -40,7 +40,8 @@ class CourseList extends React.Component {
             course:{},
             courses: [],
             courseMembers: [],
-            NotMember:[]
+            NotMember: [],
+            showClass: false
         }
     }
     componentDidMount() {
@@ -59,7 +60,8 @@ class CourseList extends React.Component {
     showMembers = (course) => {
         this.setState({
             date: course.date,
-            course: course
+            course: course,
+            showClass: !this.state.showClass
         })
         this.props.apiClient.getNotStudentCourse(course._id)
             .then(res => {
@@ -88,17 +90,23 @@ class CourseList extends React.Component {
             .catch(err => {
             console.log(err)
         })
-   }
+    }
+    goBack = () => {
+        this.setState({
+            showClass: !this.state.showClass
+        })
+    }
 
 
     render() {
         return (
             <>
                 <div className="content">
-                    <Row>
-                        <Col><CourseInfo members={this.state.courseMembers} NotMember={this.state.NotMember} teacher={this.state.teacher} date={this.state.date} course={this.state.course}/></Col>
-                    </Row>
-                    <Row>
+                    {this.state.showClass && <Row>
+                        <Col md="12"><CourseInfo members={this.state.courseMembers} NotMember={this.state.NotMember} teacher={this.state.teacher} date={this.state.date} course={this.state.course} /></Col>
+                        <Col md="2"><Button color='primary' onClick={this.goBack}>بازگشت</Button></Col>
+                    </Row>}
+                    {!this.state.showClass && <Row>
                         <Col md="12">
                             <Card>
                                 <CardHeader>
@@ -132,7 +140,7 @@ class CourseList extends React.Component {
                                 </CardBody>
                             </Card>
                         </Col>
-                    </Row>
+                    </Row>}
                 </div>
             </>
         );
