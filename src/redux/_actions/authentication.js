@@ -41,13 +41,13 @@ export const loginUser = (user,history) => dispatch => {
             //    debugger
                 switch(role){
                     
-                    case 'student':
+                    case 'کاروند':
                         history.push('/student/dashboard');
                         break;
-                    case 'teacher':
+                    case 'استاد':
                         history.push('/teacher/dashboard');
                         break;
-                    case 'admin':
+                    case 'مدیر':
                         history.push("/admin/dashboard");
                         break;
                     default:
