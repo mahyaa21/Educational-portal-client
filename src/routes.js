@@ -44,13 +44,7 @@ import LoginPage from "views/login/login.jsx";
 // import Maps from "views/student/Map.jsx";
 // import UserPage from "views/student/User.jsx";
 export let AdminRoutes = [
-    {
-      path: "/dashboard",
-      name: "داشبورد",
-      icon: "nc-icon nc-bank",
-      component: AdminDashboard,
-      layout: "/admin"
-  },
+
   {
     path: "/addUser",
     name: "ثبت کاربر جدید",
