@@ -33,7 +33,7 @@ import Typography from "views/teacher/Typography.jsx";
 import TableList from "views/teacher/Tables.jsx";
 import Maps from "views/teacher/Map.jsx";
 import UserPage from "views/teacher/User.jsx";
-import TeacherHomeWorkManagment from 'views/teacher/HomeWorkManagment.jsx'
+import TeacherSearchCourse from 'views/teacher/SearchCourse.jsx';
 import LoginPage from "views/login/login.jsx";
 //student routes address
 // import Dashboard from "views/student/Dashboard.jsx";
@@ -78,7 +78,7 @@ export let TeacherRoutes = [
     path: "/dashboard",
     name: "مدیریت تکالیف",
     icon: "nc-icon nc-bank",
-    component: TeacherHomeWorkManagment,
+    component: TeacherSearchCourse,
     layout: "/teacher"
   },
   {

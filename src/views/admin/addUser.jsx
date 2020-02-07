@@ -130,7 +130,11 @@ class addUser extends React.Component {
     }
 
     deleteUser = (id) => {
-        this.props.apiClient.deleteUser(id)
+        let confrimation;
+         confrimation = window.confirm('از حذف کاربر مطمئنید؟');
+
+        if (confrimation) {
+            this.props.apiClient.deleteUser(id)
             .then(res => {
                 if (res.status === 200) {
                     console.log('کاربر با موفقیت حذف شد');
@@ -139,7 +143,8 @@ class addUser extends React.Component {
             })
             .catch(err => {
                 console.log(err);
-        })
+            })
+        }
     }
 
     Addedusers = () => {

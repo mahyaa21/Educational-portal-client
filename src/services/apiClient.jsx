@@ -129,6 +129,45 @@ export const apiClient = {
             .catch(err=>err)
         
         })
+    },
+
+    //upload home work 
+    UploadHomeWork(homework,id) {
+        return new Promise((resolve,reject) => {
+            debugger
+            Axios(`http://localhost:3000/api/users/upload`,{
+                method: 'POST',
+                headers: { 
+                    fileName: homework.name,
+                    user: id,
+                    // 'Content-Type': 'application/json'
+                },
+                data: homework
+            })
+            .then(res => res)
+            .then(resolve)
+            .catch(err=>err)
+        })
+       
+    },
+
+    ///get teacher cours   
+    getTeacherCourses(teacherId) {
+        return new Promise((resolve,reject) => {
+            Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/user/${teacherId}`,{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    
+                },
+                
+            })
+                .then(res => res)
+                .then(resolve)
+            .catch(err=>err)
+        
+        })
     }
+
 
 }   

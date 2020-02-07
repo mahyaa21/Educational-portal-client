@@ -42,7 +42,8 @@ class HomeWorkManagment extends React.Component {
         this.state = {
             homeworks: [],
             AddHomework: false,
-            showPostedHomework:false
+            showPostedHomework: false,
+            
         }
     }
     componentWillMount() {
@@ -60,6 +61,16 @@ class HomeWorkManagment extends React.Component {
     DownloadHomWork = (id)=>{
         //request to download home work
     }
+    UploadTeacherHomeWork = (homework) => {
+      debugger
+        this.props.apiClient.UploadHomeWork(homework,this.props.auth.user.id)
+            .then(res => {
+                alert('تکلیف با موفقیت ثبت شد');
+            })
+            .catch(err => {
+            console.log(err)
+        })
+    }
     AddHomeWorkToggle = (e) => {
         e.preventDefault();
         this.setState({
@@ -69,7 +80,8 @@ class HomeWorkManagment extends React.Component {
     PostedHomeWorkToggle = (e) => {
         e.preventDefault();
         this.setState({
-            showPostedHomework:!this.state.showPostedHomework
+            showPostedHomework: !this.state.showPostedHomework,
+           
         })
     }
 
@@ -93,7 +105,7 @@ class HomeWorkManagment extends React.Component {
                     </Row>
                 })}
                 <Row>
-                    <Col md="3">{(this.state.AddHomework )? <AddHomeWork/> : <Button onClick={this.AddHomeWorkToggle}> <span className='mr-1'>اضافه کردن تکلیف جدید</span><i className="nc-icon nc-simple-add" id="exitTooltip" /></Button>}</Col>
+                    <Col md="3">{(this.state.AddHomework) ? <AddHomeWork AddHomeWorkToggle={this.AddHomeWorkToggle} modal={this.state.AddHomework} UploadTeacherHomeWork={this.UploadTeacherHomeWork}/> : <Button onClick={this.AddHomeWorkToggle}> <span className='mr-1'>اضافه کردن تکلیف جدید</span><i className="nc-icon nc-simple-add" id="exitTooltip" /></Button>}</Col>
                 </Row>
         </div>
       </>
