@@ -39,21 +39,21 @@ export const loginUser = (user,history) => dispatch => {
                 // console.log(res.data)
                 // console.log(role)
             //    debugger
-                switch(role){
+                // switch(role){
                     
-                    case 'کاروند':
-                        history.push('/student/dashboard');
-                        break;
-                    case 'استاد':
-                        history.push('/teacher/dashboard');
-                        break;
-                    case 'مدیر':
-                        history.push("/admin/dashboard");
-                        break;
-                    default:
-                        alert('you are not registerd!')   
-                        break;         
-                }
+                //     case 'کاروند':
+                //         history.push('/student/dashboard');
+                //         break;
+                //     case 'استاد':
+                //         history.push('/teacher/dashboard');
+                //         break;
+                //     case 'مدیر':
+                //         history.push("/admin/dashboard");
+                //         break;
+                //     default:
+                //         alert('you are not registerd!')   
+                //         break;         
+                // }
             })
         .catch(err => {
                 console.log(err)

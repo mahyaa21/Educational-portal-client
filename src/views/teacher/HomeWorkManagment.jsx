@@ -43,12 +43,13 @@ class HomeWorkManagment extends React.Component {
             homeworks: [],
             AddHomework: false,
             showPostedHomework: false,
-            
+            course: this.props.course
         }
     }
-    componentWillMount() {
-        this.props.apiClient.GetHomeWorks(this.props.auth.user.id)
+    componentDidMount() {
+        this.props.apiClient.GetHomeWorksCourse(this.state.course,this.props.auth.user.id)
             .then(res => {
+                console.log('res',res)
                 this.setState({
                     homeworks:[...res.data]
                     })
@@ -62,8 +63,8 @@ class HomeWorkManagment extends React.Component {
         //request to download home work
     }
     UploadTeacherHomeWork = (homework) => {
-      debugger
-        this.props.apiClient.UploadHomeWork(homework,this.props.auth.user.id)
+     
+        this.props.apiClient.UploadHomeWork(homework,this.props.auth.user.id,this.state.course)
             .then(res => {
                 alert('تکلیف با موفقیت ثبت شد');
             })

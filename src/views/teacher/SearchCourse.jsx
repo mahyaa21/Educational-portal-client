@@ -54,15 +54,8 @@ class SearchCourse extends React.Component {
         })
     }
 
-    chooseCourseHomeworks = () => {
-        if(this.state.selectedCourse)
-        {
-            
-        }
-    }
-
     componentDidMount() {
-        // this.chooseCourseHomeworks();
+
         this.props.apiClient.getTeacherCourses(this.props.auth.user.id)
             .then(res => {
                 this.setState({
@@ -92,7 +85,7 @@ class SearchCourse extends React.Component {
                             </FormGroup>
                         </Col>
                     </Row>}
-                    {this.state.selectedCourse && <HomeWorkManagment />}
+                {this.state.selectedCourse && <HomeWorkManagment course={this.state.selectedCourse}/>}
                 </div>
            
         );

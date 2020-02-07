@@ -132,7 +132,7 @@ export const apiClient = {
     },
 
     //upload home work 
-    UploadHomeWork(homework,id) {
+    UploadHomeWork(homework,id,course) {
         return new Promise((resolve,reject) => {
             debugger
             Axios(`http://localhost:3000/api/users/upload`,{
@@ -140,6 +140,7 @@ export const apiClient = {
                 headers: { 
                     fileName: homework.name,
                     user: id,
+                    course: course
                     // 'Content-Type': 'application/json'
                 },
                 data: homework
@@ -151,14 +152,33 @@ export const apiClient = {
        
     },
 
-    ///get teacher cours   
+    ///get teacher course   
     getTeacherCourses(teacherId) {
         return new Promise((resolve,reject) => {
-            Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/user/${teacherId}`,{
+            Axios(`http://localhost:3000/api/users/courses/teacher/courses/${teacherId}`,{
                 method: 'GET',
                 headers: { 
                     'Content-Type': 'application/json',
                     
+                },
+                
+            })
+                .then(res => res)
+                .then(resolve)
+            .catch(err=>err)
+        
+        })
+    },
+    //GetHomeWorksCourse
+    GetHomeWorksCourse(coursename,teacherId) {
+    
+        return new Promise((resolve,reject) => {
+            
+            Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/user/${teacherId}`,{
+                method: 'GET',
+                headers: { 
+                    // 'Content-Type': 'application/json',
+                    course:coursename
                 },
                 
             })
