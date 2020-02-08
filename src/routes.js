@@ -36,6 +36,8 @@ import UserPage from "views/teacher/User.jsx";
 import TeacherSearchCourse from 'views/teacher/SearchCourse.jsx';
 import LoginPage from "views/login/login.jsx";
 //student routes address
+import PostHomeWork from 'views/student/PostHomeWork.jsx';
+import DownloadHomeWorks from 'views/student/DownloadHomeWorks.jsx'
 // import Dashboard from "views/student/Dashboard.jsx";
 // import Notifications from "views/student/Notifications.jsx";
 // import Icons from "views/student/Icons.jsx";
@@ -133,17 +135,17 @@ export let StudentRoutes = [
     layout: "/student"
   },
   {
-    path: "/icons",
+    path: "/posthomework",
     name: "ارسال تکلیف جدید",
     icon: "nc-icon nc-diamond",
-    component: Icons,
+    component: PostHomeWork,
     layout: "/student"
   },
   {
-    path: "/maps",
+    path: "/downloadhomework",
     name: "دریافت تکالیف",
     icon: "nc-icon nc-pin-3",
-    component: Maps,
+    component: DownloadHomeWorks,
     layout: "/student"
   },
   {

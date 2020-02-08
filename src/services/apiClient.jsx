@@ -133,8 +133,9 @@ export const apiClient = {
 
     //upload home work 
     UploadHomeWork(homework,id,course) {
+        console.log('pppp')
         return new Promise((resolve,reject) => {
-            debugger
+       
             Axios(`http://localhost:3000/api/users/upload`,{
                 method: 'POST',
                 headers: { 
@@ -145,7 +146,7 @@ export const apiClient = {
                 },
                 data: homework
             })
-            .then(res => res)
+            .then(res => console.log('www', res))
             .then(resolve)
             .catch(err=>err)
         })
@@ -174,7 +175,7 @@ export const apiClient = {
     
         return new Promise((resolve,reject) => {
             
-            Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/user/${teacherId}`,{
+            Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/${teacherId}`,{
                 method: 'GET',
                 headers: { 
                     // 'Content-Type': 'application/json',

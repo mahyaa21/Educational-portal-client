@@ -71,7 +71,7 @@ class SearchCourse extends React.Component {
         return (
          
                 <div className="content" >
-                    {!this.state.selectedCourse && <Row className='m-0'>
+                     <Row className='m-0'>
                         <Col md="4" sm="8" className=" m-auto">
                             <FormGroup>
                                 <label>انتخاب نام دوره</label>
@@ -84,7 +84,7 @@ class SearchCourse extends React.Component {
                                 </Input>
                             </FormGroup>
                         </Col>
-                    </Row>}
+                    </Row>
                 {this.state.selectedCourse && <HomeWorkManagment course={this.state.selectedCourse}/>}
                 </div>
            
