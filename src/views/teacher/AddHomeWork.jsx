@@ -36,12 +36,27 @@ class AddHomeWork extends React.Component {
     }
 
     this.props.UploadTeacherHomeWork(homeWork);
-    
+
   }
+
+  uploadHomework = (e) => {
+    console.log('ppwwww',this.state)
+    e.preventDefault();
+    let data = new FormData()
+    data.append('file',this.state.selectedFile)
+    let homeWork = {
+      name: this.state.name,
+      data: data
+    }
+
+    this.props.UploadTeacherHomeWork(homeWork);
+
+  }
+
   handleInputChange = (e) => {
     e.preventDefault();
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     })
   }
   FileonChangeHandler = event => {
@@ -50,21 +65,21 @@ class AddHomeWork extends React.Component {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0,
-    })
+    },() => { console.log('rrrr',this.state) })
 
   }
 
   UploadClockHandler = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append('file', this.state.selectedFile)
+    data.append('file',this.state.selectedFile)
 
     this.setState({
       name: this.state.name,
       data: data
     })
-      
-    
+
+
   }
 
   render() {
@@ -88,22 +103,22 @@ class AddHomeWork extends React.Component {
                 <FormGroup>
                   <label> آپلود فایل</label>
                   {/* {this.state.errors.email && (<div className="validation-text">{this.state.errors.email}</div>)} */}
-                  <Input type="file" name="file" onChange={this.FileonChangeHandler} />
+                  <Input type={"file"} name="file" onChange={(e) => { console.log('e',e.target) }} />
                 </FormGroup>
               </Col>
             </Row>
             <Row>
               <Col md="12">
                 <FormGroup>
-                  <button type='button' className="btn btn-success btn-block" onClick={this.UploadClockHandler }>آپلود</button>
+                  <button type='button' className="btn btn-success btn-block" onClick={(e) => { this.uploadHomework(e) }}>آپلود</button>
                 </FormGroup>
               </Col>
             </Row>
-            <Button  type='submit' color='success'>ثبت</Button>
+            <Button type='submit' color='success'>ثبت</Button>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button type='button'  onClick={this.props.AddHomeWorkToggle}>بستن</Button>
+          <Button type='button' onClick={this.props.AddHomeWorkToggle}>بستن</Button>
         </ModalFooter>
       </Modal>
 

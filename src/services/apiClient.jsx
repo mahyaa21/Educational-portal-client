@@ -8,18 +8,18 @@ export const apiClient = {
             Axios.get('http://localhost:3000/api/users')
                 .then(res => res)
                 .then(resolve)
-                .catch(err=>err)
-      })  
+                .catch(err => err)
+        })
     },
 
     //delete user
-    deleteUser  (id) {
+    deleteUser(id) {
         return new Promise((resolve,reject) => {
             Axios.get(`http://localhost:3000/api/users/delete/${id}`)
                 .then(res => res)
                 .then(resolve)
-                .catch(err=>err)
-      }) 
+                .catch(err => err)
+        })
     },
 
     //GET teacher list
@@ -38,11 +38,11 @@ export const apiClient = {
         return new Promise((resolve,reject) => {
             Axios('http://localhost:3000/api/users/courses/create',{
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json'
                 },
                 data: JSON.stringify(course)
-              })
+            })
                 .then(res => res)
                 .then(resolve)
                 .catch(err => err)
@@ -72,7 +72,7 @@ export const apiClient = {
     },
     //GET students of specific course
     getStudentCourse(courseId) {
-        
+
         return new Promise((resolve,reject) => {
             Axios.get(`http://localhost:3000/api/users/courses-user/studentlist/${courseId}`)
                 .then(res => res.data)
@@ -82,7 +82,7 @@ export const apiClient = {
         })
     },
     //get course teacher
-    getCourseTeacher(courseId){
+    getCourseTeacher(courseId) {
         return new Promise((resolve,reject) => {
             Axios.get(`http://localhost:3000/api/users/courses/getteacher/${courseId}`)
                 .then(res => res.data)
@@ -93,7 +93,7 @@ export const apiClient = {
     },
     ////get student is not member of course
     getNotStudentCourse(courseId) {
-        
+
         return new Promise((resolve,reject) => {
             Axios.get(`http://localhost:3000/api/users/courses-user/notstudentlist/${courseId}`)
                 .then(res => res.data)
@@ -104,7 +104,7 @@ export const apiClient = {
     },
     ////get homeworks
     GetHomeWorks(TeacherId) {
-        
+
         return new Promise((resolve,reject) => {
             Axios.get(`http://localhost:3000/api/users/homeworks`)
                 .then(res => res.data)
@@ -119,38 +119,38 @@ export const apiClient = {
         return new Promise((resolve,reject) => {
             Axios(`http://localhost:3000/api/users/courses-user/create`,{
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json'
                 },
                 data: JSON.stringify(courseUser)
             })
                 .then(res => res)
                 .then(resolve)
-            .catch(err=>err)
-        
+                .catch(err => err)
+
         })
     },
 
     //upload home work 
-    UploadHomeWork(homework,id,course) {
+    UploadHomeWork(homework) {
         console.log('pppp')
         return new Promise((resolve,reject) => {
-       
+
             Axios(`http://localhost:3000/api/users/upload`,{
                 method: 'POST',
-                headers: { 
-                    fileName: homework.name,
-                    user: id,
-                    course: course
-                    // 'Content-Type': 'application/json'
+                headers: {
+                    // fileName: homework.name,
+                    // user: id,
+                    // course: course
+                    'Content-Type': 'application/json'
                 },
                 data: homework
             })
-            .then(res => console.log('www', res))
-            .then(resolve)
-            .catch(err=>err)
+                .then(res => { return res })
+                .then(resolve)
+                .catch(err => err)
         })
-       
+
     },
 
     ///get teacher course   
@@ -158,35 +158,35 @@ export const apiClient = {
         return new Promise((resolve,reject) => {
             Axios(`http://localhost:3000/api/users/courses/teacher/courses/${teacherId}`,{
                 method: 'GET',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
-                    
+
                 },
-                
+
             })
                 .then(res => res)
                 .then(resolve)
-            .catch(err=>err)
-        
+                .catch(err => err)
+
         })
     },
     //GetHomeWorksCourse
     GetHomeWorksCourse(coursename,teacherId) {
-    
+
         return new Promise((resolve,reject) => {
-            
+
             Axios(`http://localhost:3000/api/users/homeworks/gethomeworks/${teacherId}`,{
                 method: 'GET',
-                headers: { 
+                headers: {
                     // 'Content-Type': 'application/json',
-                    course:coursename
+                    course: coursename
                 },
-                
+
             })
                 .then(res => res)
                 .then(resolve)
-            .catch(err=>err)
-        
+                .catch(err => err)
+
         })
     }
 
