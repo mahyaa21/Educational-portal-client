@@ -170,7 +170,7 @@ class HomeWorkManagment extends Component {
             teacherId: this.props.auth.user.id,
             course: this.props.course,
             name: this.state.selectedFile.name,
-            data: data
+           data:data
         }
         for (var key of data.entries()) {
 			console.log(key[0] + ', ' + key[1])
