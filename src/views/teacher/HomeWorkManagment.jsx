@@ -174,20 +174,31 @@ class HomeWorkManagment extends Component {
 
     onClickHandler = () => {
 
-        const { selectedFile } = this.state;
+      const { selectedFile } = this.state;
+      const { course } = this.props;
         // debugger
         const data = new FormData();
         data.append('file',this.state.selectedFile);
-        let homework = {
-            teacherId: this.props.auth.user.id,
-            course: this.props.course,
-            name: this.state.selectedFile.name,
-           data:data
-        }
-        for (var key of data.entries()) {
-			console.log(key[0] + ', ' + key[1])
-		}
-        this.props.apiClient.UploadHomeWork(homework)
+      
+      let selectedCourse = {
+          course: course
+      }
+      let courseId = '';
+      axios.post('http://localhost:3000/api/users/courses/getcourse/id',selectedCourse
+   ).then(res => {
+      courseId = res.data
+   }).catch(err=>{
+     console.log("homeworks request is not res bcz"+ err)
+   })
+   let homework = {
+    teacherId: this.props.auth.user.id,
+    course: courseId,
+    name: this.state.selectedFile.name,
+   
+}
+      console.log('homework',homework);
+
+        this.props.apiClient.UploadHomeWork(homework,data)
             .then(res => {
               alert('با موفقیت آپلود شد')
               this.setState({
@@ -197,23 +208,6 @@ class HomeWorkManagment extends Component {
             .then(err => {
             console.log(err)
         })
-        // axios.post("/api/users/upload", data , {
-        //     // receive two    parameter endpoint url ,form data 
-        //         headers: {
-        //             fileName: selectedFile.name,
-        //             user: this.props.auth.user.id
-        //         }    
-        // })
-        //     .then(res => { // then print response status
-
-        //         if (res.status === 'Ok'){
-        //             this.setState({
-        //                 result: true
-        //             })
-        //         }
-        //         console.log(res.statusText)
-        //         alert('upload successfully!');
-        //     })
 
     }
   componentDidMount() {

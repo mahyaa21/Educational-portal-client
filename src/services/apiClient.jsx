@@ -132,13 +132,16 @@ export const apiClient = {
     },
 
     //upload home work 
-    UploadHomeWork(data) {
+    UploadHomeWork(homework,data) {
         console.log('pppp')
         return new Promise((resolve,reject) => {
 
             Axios(`http://localhost:3000/api/users/upload`,{
                 method: 'POST',
                 headers: {
+                    teacherId: homework.teacherId,
+                    course: homework.course,
+                    name: homework.name
                     // teacherId:homework.teacherId,
                     // course:homework.course,
                     // name:homework.name,
