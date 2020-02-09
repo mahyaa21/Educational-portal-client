@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import download from 'downloadjs';
-
+import SearchDownloadCourse from './searchDownloadCourse';
 import {
     Button,
     Card,
@@ -19,7 +19,7 @@ import {
     Col,
     Table
 } from "reactstrap";
-class DownloadHomework extends Component {
+class DownloadTeacherHomework extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,18 +31,8 @@ class DownloadHomework extends Component {
 
     componentWillMount() {
 
-        axios.get('http://localhost:3000/api/users/homeworks',
-            {
-                headers: {
-                    id: this.props.auth.user.id,
-                }
-            }
-        )
-            .then(res => this.setState({ homeWorks: [...res.data] }))
-            .catch(err => {
-                console.log(err);
-            })
-
+    //   this.state.course &&  
+    // this.getHomeworks()
     }
 
     GetImageFile = (address) => {
@@ -65,19 +55,48 @@ class DownloadHomework extends Component {
             console.log('downloading');
         })
     }
+    getHomeworks = (e) => {
+        e.preventDefault()
+        let selectedcourse = {
+            course: this.state.course
+        }
+        axios.post('http://localhost:3000/api/users/homeworks/getstudent/homework',selectedcourse,
+            {
+                headers: {
+                    id: this.props.auth.user.id,
+                },
+               
+            }
+        )
+            .then(res => this.setState({ homeWorks: [...res.data] }))
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
+    chooseCourse = (e) => {
+        console.log(e.target)
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+      
+    }
     render() {
         const { homeWorks } = this.state;
         console.log(homeWorks);
         return <>
-             <div className="content">
+            <div className="content">
+                
+                <SearchDownloadCourse chooseCourse={this.chooseCourse} getHomeworks={this.getHomeworks}/>
+                 
             <Row>
                 <Col md="12">
                     <Card>
                     <CardHeader>
                   <CardTitle tag="h4">دانلود تکالیف</CardTitle>
                 </CardHeader>
-                        <CardBody>
+                        <CardBody style={{ direction:'rtl', textAlign:'right' }}>
                             <Table responsive>
                                 <thead>
                                     <tr>
@@ -121,7 +140,7 @@ class DownloadHomework extends Component {
           
           
           
-DownloadHomework.propTypes = {
+DownloadTeacherHomework.propTypes = {
                 //TeacherUser: PropTypes.func.isRequired,
                 auth: PropTypes.object.isRequired
           };
@@ -131,4 +150,4 @@ const mapStateToProps = state => ({
             auth: state.auth
           });
           
-export default connect(mapStateToProps)(withRouter(DownloadHomework))
+export default connect(mapStateToProps)(withRouter(DownloadTeacherHomework))

@@ -233,13 +233,13 @@ class HomeWorkManagment extends Component {
     const course = {
       course: this.props.course
     }
-    axios.post('http://localhost:3000/api/users/homeworks',
+    axios.post('http://localhost:3000/api/users/homeworks',course,
        {
         headers: {
            id: this.props.auth.user.id,
           
          },
-         data: course
+         
       }
     ).then(res => {
       console.log('homeworkssss:' + res)
