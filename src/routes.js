@@ -31,7 +31,7 @@ import Notifications from "views/teacher/Notifications.jsx";
 import Icons from "views/teacher/Icons.jsx";
 import Typography from "views/teacher/Typography.jsx";
 import TableList from "views/teacher/Tables.jsx";
-import Maps from "views/teacher/Map.jsx";
+import DownloadTecherHomeWorks from "views/teacher/DownloadTecherHomeWorks.jsx";
 import UserPage from "views/teacher/User.jsx";
 import TeacherSearchCourse from 'views/teacher/SearchCourse.jsx';
 import LoginPage from "views/login/login.jsx";
@@ -80,21 +80,21 @@ export let TeacherRoutes = [
     path: "/dashboard",
     name: "مدیریت تکالیف",
     icon: "nc-icon nc-bank",
+    component: Dashboard,
+    layout: "/teacher"
+  },
+  {
+    path: "/upload",
+    name: "ارسال تکلیف جدید",
+    icon: "nc-icon nc-diamond",
     component: TeacherSearchCourse,
     layout: "/teacher"
   },
   {
-    path: "/icons",
-    name: "ارسال تکلیف جدید",
-    icon: "nc-icon nc-diamond",
-    component: Icons,
-    layout: "/teacher"
-  },
-  {
-    path: "/maps",
+    path: "/download",
     name: "لیست تکالیف کاروندان",
     icon: "nc-icon nc-pin-3",
-    component: Maps,
+    component: DownloadTecherHomeWorks,
     layout: "/teacher"
   },
   {
@@ -104,27 +104,7 @@ export let TeacherRoutes = [
     component: Notifications,
     layout: "/teacher"
   },
-  {
-    path: "/user-page",
-    name: "User Profile",
-    icon: "nc-icon nc-single-02",
-    component: UserPage,
-    layout: "/teacher"
-  },
-  {
-    path: "/tables",
-    name: "Table List",
-    icon: "nc-icon nc-tile-56",
-    component: TableList,
-    layout: "/teacher"
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: Typography,
-    layout: "/teacher"
-  },
+
 ]
 export let StudentRoutes = [
   {

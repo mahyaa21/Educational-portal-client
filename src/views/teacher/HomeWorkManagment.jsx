@@ -128,8 +128,20 @@
 // });
 
 // export default connect(mapStateToProps)(withApiClient(withRouter(HomeWorkManagment)));
-
-
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardTitle,
+    FormGroup,
+    Form,
+    Input,
+    Row,
+  Col,
+    Table
+} from "reactstrap";
 import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -177,7 +189,10 @@ class HomeWorkManagment extends Component {
 		}
         this.props.apiClient.UploadHomeWork(homework)
             .then(res => {
-                alert('با موفقیت آپلود شد')
+              alert('با موفقیت آپلود شد')
+              this.setState({
+                homeworks: [...this.state.homeworks,homework]
+              })
             })
             .then(err => {
             console.log(err)
@@ -216,11 +231,16 @@ class HomeWorkManagment extends Component {
 
     console.log('id:' + this.props.auth.user.id)
 
-    axios.get('/api/users/homeworks',
+    axios.get('http://localhost:3000/api/users/homeworks',
        {
         headers: {
-          id: this.props.auth.user.id,
-        }
+           id: this.props.auth.user.id,
+          
+         },
+        //  data: {
+        //    course:
+        //      this.props.course
+        //  }
       }
     ).then(res => {
       console.log('homeworkssss:' + res)
@@ -234,23 +254,29 @@ class HomeWorkManagment extends Component {
 
 showHomeworks = () =>{
     const {homeworks} = this.state;
-    return <>
-         <table>
-          <tbody>
-                <tr>
-                    <th>HomeWorks added</th>
-                </tr>
-
-                {homeworks.map(homework=>{
+  return <><Row style={{ textAlign: 'right' }}>
+                  <Col md="12">
+              <Card>
+                <CardBody>
+                  <Table responsive>
+                    <thead className="text-primary">
+                      <tr>
+                        <th>تکالیف اضافه شده</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {homeworks.map(homework=>{
                     return <tr key={homework.id}>
                         <td>{homework.name}</td>
                     </tr>
-                })}
-                
-          
-          
-          </tbody>
-          </table>
+                })}              
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+    </Col>
+    </Row>
+
     </>
 }
 
@@ -263,7 +289,7 @@ showHomeworks = () =>{
       <input type="file" style={{ width: '70%', }} name="file" onChange={this.onChangeHandler} />
       <button type="button" style={{ width: '70%', }} className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
 
-      {/* {this.showHomeworks()} */}
+      {this.state.homeworks && this.showHomeworks()}
 
     </div>
   }
