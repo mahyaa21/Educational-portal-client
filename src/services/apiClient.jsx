@@ -156,7 +156,31 @@ export const apiClient = {
         })
 
     },
+    //upload student home work 
+    UploadStudentHomeWork(data) {
+        console.log('pppp')
+        return new Promise((resolve,reject) => {
 
+            Axios(`http://localhost:3000/api/users/student/upload`,{
+                method: 'POST',
+                headers: {
+                    // teacherId:homework.teacherId,
+                    // course:homework.course,
+                    // name:homework.name,
+                    // fileName: homework.name,
+                    // user: id,
+                    // course: course
+                    // 'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            })
+                .then(res => { return res })
+                .then(resolve)
+                .catch(err => err)
+        })
+
+    },
     ///get teacher course   
     getTeacherCourses(teacherId) {
         return new Promise((resolve,reject) => {

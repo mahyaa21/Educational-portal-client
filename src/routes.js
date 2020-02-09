@@ -135,27 +135,6 @@ export let StudentRoutes = [
     component: Notifications,
     layout: "/student"
   },
-  {
-    path: "/user-page",
-    name: "User Profile",
-    icon: "nc-icon nc-single-02",
-    component: UserPage,
-    layout: "/student"
-  },
-  {
-    path: "/tables",
-    name: "Table List",
-    icon: "nc-icon nc-tile-56",
-    component: TableList,
-    layout: "/student"
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: Typography,
-    layout: "/student"
-  },
 ]
 
 export let LoginRoute = {

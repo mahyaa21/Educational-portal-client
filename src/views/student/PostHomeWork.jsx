@@ -1,174 +1,183 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
-// reactstrap components
 import {
+  Button,
   Card,
   CardHeader,
   CardBody,
+  CardFooter,
   CardTitle,
-  Table,
+  FormGroup,
+  Form,
+  Input,
   Row,
-  Col
+Col,
+  Table
 } from "reactstrap";
+import React, { Component } from 'react'
+import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { withApiClient } from '../../services/withApiCLient';
+// import './teacher.scss';
 
-class PostHomeWork extends React.Component {
-  render() {
-    return (
-      <>
-        <div className="content">
-          <Row>
-            <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-right">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-right">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-right">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-right">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-right">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-right">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$98,615</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="12">
-              <Card className="card-plain">
-                <CardHeader>
-                  <CardTitle tag="h4">Table on Plain Background</CardTitle>
-                  <p className="card-category">
-                    Here is a subtitle for this table
-                  </p>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-right">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-right">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-right">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-right">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-right">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-right">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$98,615</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
+class HomeWorkManagment extends Component {
+constructor(props) {
+  super(props);
+  this.state = {
+    selectedFile: null,
+    homeworks: []  
   }
+
 }
 
-export default PostHomeWork;
+onChangeHandler = event => {
+  
+  console.log(event.target.files[0])
+  this.setState({
+    selectedFile: event.target.files[0],
+    loaded: 0,
+  })
+
+}
+
+
+
+  onClickHandler = () => {
+
+      const { selectedFile } = this.state;
+      // debugger
+      const data = new FormData();
+      data.append('file',this.state.selectedFile);
+      let homework = {
+          studentId: this.props.auth.user.id,
+          course: this.props.auth.user.course,
+          name: this.state.selectedFile.name,
+         data:data
+      }
+      for (var key of data.entries()) {
+    console.log(key[0] + ', ' + key[1])
+  }
+      this.props.apiClient.UploadStudentHomeWork(homework)
+          .then(res => {
+            alert('با موفقیت آپلود شد')
+            this.setState({
+              homeworks: [...this.state.homeworks,homework]
+            })
+          })
+          .then(err => {
+          console.log(err)
+      })
+      // axios.post("/api/users/upload", data , {
+      //     // receive two    parameter endpoint url ,form data 
+      //         headers: {
+      //             fileName: selectedFile.name,
+      //             user: this.props.auth.user.id
+      //         }    
+      // })
+      //     .then(res => { // then print response status
+
+      //         if (res.status === 'Ok'){
+      //             this.setState({
+      //                 result: true
+      //             })
+      //         }
+      //         console.log(res.statusText)
+      //         alert('upload successfully!');
+      //     })
+
+  }
+componentDidMount() {
+  if (this.props.auth.isAuthenticated) {
+    // this.props.history.push('/');
+  } else {
+    this.props.history.push('/');
+    alert('not authenticated')
+
+  }
+
+}
+
+componentWillMount(){
+
+  console.log('id:' + this.props.auth.user.id)
+  const course = {
+    course: this.props.auth.user.course
+  }
+  axios.get('http://localhost:3000/api/users/homeworks/student',
+     {
+      headers: {
+         id: this.props.auth.user.id,
+        
+       },
+      //  data: course
+    }
+  ).then(res => {
+    console.log('homeworkssss:' + res)
+      this.setState({homeworks: [...res.data]})
+  }).catch(err=>{
+    console.log("homeworks request is not res bcz"+ err)
+  })
+   console.log('homeworks:' + this.state.homeworks)
+    
+}
+
+showHomeworks = () =>{
+  const {homeworks} = this.state;
+return <><Row style={{ textAlign: 'right' }}>
+                <Col md="12">
+    <Card>
+      <CardHeader>تکالیف آپلود شده</CardHeader>
+              <CardBody>
+                <Table responsive>
+                  <thead className="text-primary">
+                    <tr>
+              <th>نام</th>
+              <th>تاریخ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {homeworks.map(homework=>{
+                  return <tr key={homework.id}>
+                    <td>{homework.name}</td>
+                    <td>{homework.date}</td>
+                  </tr>
+              })}              
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+  </Col>
+  </Row>
+
+  </>
+}
+
+
+
+render() {
+
+  return <div className='content'>
+
+    <input type="file" style={{ width: '70%', }} name="file" onChange={this.onChangeHandler} />
+    <button type="button" style={{ width: '70%', }} className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
+
+    {this.state.homeworks && this.showHomeworks()}
+
+  </div>
+}
+}
+
+
+
+
+HomeWorkManagment.propTypes = {
+//TeacherUser: PropTypes.func.isRequired,
+auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+errors: state.errors,
+auth: state.auth
+});
+
+export default connect(mapStateToProps)(withApiClient(withRouter(HomeWorkManagment)));

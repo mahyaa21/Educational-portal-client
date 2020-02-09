@@ -1,174 +1,134 @@
-/*!
+import React,{ Component } from 'react'
+import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import download from 'downloadjs';
 
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
-// reactstrap components
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
-  Row,
-  Col
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardTitle,
+    FormGroup,
+    Form,
+    Input,
+    Row,
+    Col,
+    Table
 } from "reactstrap";
+class DownloadHomework extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            //selectedFile: null,
+            homeWorks: [],
+        }
 
-class DownloadHomeWorks extends React.Component {
-  render() {
-    return (
-      <>
-        <div className="content">
-          <Row>
-            <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-right">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-right">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-right">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-right">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-right">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-right">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$98,615</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="12">
-              <Card className="card-plain">
-                <CardHeader>
-                  <CardTitle tag="h4">Table on Plain Background</CardTitle>
-                  <p className="card-category">
-                    Here is a subtitle for this table
-                  </p>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-right">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-right">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-right">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-right">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-right">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-right">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-right">$98,615</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
-  }
-}
+    }
 
-export default DownloadHomeWorks;
+    componentWillMount() {
+
+        axios.get('http://localhost:3000/api/users/homeworks/course',
+            {
+                headers: {
+                    id: this.props.auth.user.course,
+                }
+            }
+        )
+            .then(res => this.setState({ homeWorks: [...res.data] }))
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
+
+    GetImageFile = (address) => {
+        const { images } = this.state;
+        axios({
+            url: `http://localhost:3000/api/users/showimage/${address}`,
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            const image = { name: window.URL.createObjectURL(new Blob([response.data])),address: address };
+            this.setState({
+                images: [...images,image]
+            })
+
+        });
+
+    }
+    OnCLickDownloader = (address) => {
+        axios.get(`http://localhost:3000/api/users/download/${address}`).then(res => {
+            console.log('downloading');
+        })
+    }
+
+    render() {
+        const { homeWorks } = this.state;
+        console.log(homeWorks);
+        return <>
+            <div className="content">
+            <Row>
+                <Col md="12">
+                    <Card>
+                    <CardHeader>
+                  <CardTitle tag="h4">دانلود تکالیف</CardTitle>
+                </CardHeader>
+                        <CardBody style={{ direction:'rtl', textAlign:'right' }}>
+                            <Table responsive >
+                                <thead>
+                                    <tr>
+                                        <th>تکالیف</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {homeWorks.map(homeWork => {
+                                        return <tr key={homeWork.id}>
+
+                                            <td>
+                                                {homeWork.name}</td>
+                                            <td><button
+                                                type="button"
+                                                onClick={async () => {
+                                                    const res = await fetch('http://localhost:3000/api/users/download',{
+                                                        headers: {
+                                                            address: homeWork.name,
+                                                        }
+                                                    });
+                                                    const blob = await res.blob();
+                                                    download(blob,homeWork.name);
+                                                    // filedownload(blob,'test.rar')
+                                                }}
+                                            >Download</button></td>
+
+                                        </tr>
+                                    })}
+                                </tbody>
+                            </Table>
+                            </CardBody>
+                      </Card>
+                  </Col>
+                </Row>
+                </div>
+    </>
+            }
+          }
+          
+          
+          
+          
+DownloadHomework.propTypes = {
+                //TeacherUser: PropTypes.func.isRequired,
+                auth: PropTypes.object.isRequired
+          };
+          
+const mapStateToProps = state => ({
+                errors: state.errors,
+            auth: state.auth
+          });
+          
+export default connect(mapStateToProps)(withRouter(DownloadHomework))
