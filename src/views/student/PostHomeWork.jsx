@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withApiClient } from '../../services/withApiCLient';
+import moment from 'jalali-moment';
 // import './teacher.scss';
 
 class HomeWorkManagment extends Component {
@@ -139,7 +140,7 @@ return <><Row style={{ textAlign: 'right' }}>
                   {homeworks.map(homework=>{
                   return <tr key={homework.id}>
                     <td>{homework.name}</td>
-                    <td>{homework.date}</td>
+                    <td>{moment(homework.date ,'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
                   </tr>
               })}              
                   </tbody>

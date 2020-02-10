@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import download from 'downloadjs';
 import SearchDownloadCourse from './searchDownloadCourse';
+import moment from 'jalali-moment';
 import {
     Button,
     Card,
@@ -108,8 +109,8 @@ class DownloadTeacherHomework extends Component {
                                     {homeWorks.map(homeWork => {
                                         return <tr key={homeWork.id}>
 
-                                            <td>
-                                                {homeWork.name}</td>
+                                            <td>{homeWork.name}</td>
+                                            <td>{moment(homeWork.date ,'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
                                             <td><button
                                                 type="button"
                                                 onClick={async () => {
