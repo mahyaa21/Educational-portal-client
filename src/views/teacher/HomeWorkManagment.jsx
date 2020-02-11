@@ -142,7 +142,7 @@ showHomeworks = () =>{
                     {homeworks.map(homework=>{
                     return <tr key={homework.id}>
                         <td>{homework.name}</td>
-                        <td>{moment(homework.date ,'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
+                        <td>{homework.date}</td>
                     </tr>
                 })}             
                     </tbody>
@@ -159,13 +159,20 @@ showHomeworks = () =>{
  
   render() {
  
-    return <div className='Home-work_container'>
-
-      <input type="file" style={{ width: '70%', }} name="file" onChange={this.onChangeHandler} />
-      <button type="button" style={{ width: '70%', }} className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-
+    return <div className='content'>
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+      <input type="file"  name="file" onChange={this.onChangeHandler} />
+      <button type="button"  className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
+      </CardBody>
+      </Card>
+        </Col>
+      </Row>
+   
       {this.state.homeworks && this.showHomeworks()}
-
+     
     </div>
   }
 }

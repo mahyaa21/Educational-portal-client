@@ -45,29 +45,28 @@ onChangeHandler = event => {
 
   onClickHandler = () => {
 
-      const { selectedFile } = this.state;
+    const { selectedFile } = this.state;
+    let homework = {};
       // debugger
       const data = new FormData();
       data.append('file',this.state.selectedFile);
-      let homework = {
-          studentId: this.props.auth.user.id,
-          course: this.props.auth.user.course,
-          name: this.state.selectedFile.name,
-         data:data
-      }
-      for (var key of data.entries()) {
-    console.log(key[0] + ', ' + key[1])
-  }
-      this.props.apiClient.UploadStudentHomeWork(homework)
-          .then(res => {
-            alert('با موفقیت آپلود شد')
-            this.setState({
-              homeworks: [...this.state.homeworks,homework]
+      homework = {
+        teacherId: this.props.auth.user.id,
+        course: this.props.auth.user.course,  
+        name: this.state.selectedFile.name,
+    }
+          console.log('homework',homework);
+    
+            this.props.apiClient.UploadHomeWork(homework,data)
+                .then(res => {
+                  alert('با موفقیت آپلود شد')
+                  this.setState({
+                    homeworks: [...this.state.homeworks,homework]
+                  })
+                })
+                .then(err => {
+                console.log(err)
             })
-          })
-          .then(err => {
-          console.log(err)
-      })
       // axios.post("/api/users/upload", data , {
       //     // receive two    parameter endpoint url ,form data 
       //         headers: {
@@ -140,7 +139,7 @@ return <><Row style={{ textAlign: 'right' }}>
                   {homeworks.map(homework=>{
                   return <tr key={homework.id}>
                     <td>{homework.name}</td>
-                    <td>{moment(homework.date ,'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
+                    <td>{homework.date}</td>
                   </tr>
               })}              
                   </tbody>

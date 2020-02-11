@@ -20,6 +20,7 @@ import React from "react";
 import { withApiClient } from '../../services/withApiCLient';
 import { withRouter } from 'react-router-dom';
 import CourseInfo from './courseInfo';
+import moment from 'jalali-moment';
 // reactstrap components
 import {
     Card,
@@ -132,7 +133,7 @@ class CourseList extends React.Component {
                                                 return <tr>
                                                     <td>{course.name}</td>
                                                     <td>{(course.status == 'I') ?<Badge color="warning">درحال برگزاری...</Badge>  : <Badge color="danger">به پایان رسیده</Badge>}</td>
-                                                    <td>{course.date}</td>
+                                                    <td>{moment(course.date ,'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
                                                     <td><Button color="primary" onClick={()=>{ this.showMembers(course) }}>جزئیات بیشتر</Button></td>
                                                     
                                                 </tr>
