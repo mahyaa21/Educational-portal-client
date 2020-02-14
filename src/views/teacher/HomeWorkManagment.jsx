@@ -150,7 +150,7 @@ showHomeworks = () =>{
     const {homeworks} = this.state;
   return <>
     <Row style={{ textAlign: 'right' }}>
-                  <Col md="12">
+                  <Col sm="6" className="m-auto">
       <Card>
         <CardHeader><CardTitle tag="h5">
           تکالیف آپلود شده</CardTitle></CardHeader>
@@ -188,13 +188,17 @@ showHomeworks = () =>{
       <SearchCourse setSelectedcourse={this.setSelectedCourse} submitCourse={this.submitCourse}/>
       </Row>
       <Row>
-        <Col>
+        <Col sm="6" className="m-auto">
           <Card>
+            <CardHeader>
+              <CardTitle tag="h6">{this.state.selectedCourse}</CardTitle>
+              <CardTitle tag="p">.بعد از انتخاب درس موردنظر فایل مورد نظر را جستجو و سپس بازدن دکمه آپلود آنرا بارگزاری نمایید</CardTitle>
+            </CardHeader>
             <CardBody>
-      <input type="file"  name="file" onChange={this.onChangeHandler} />
-      <button type="button"  className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-      </CardBody>
-      </Card>
+                <input type="file" style={{ width:'30%', margin: 'auto'}}  name="file" onChange={this.onChangeHandler} />
+                <button type="button" style={{ width:'30%' }}  className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
+            </CardBody>
+          </Card>
         </Col>
       </Row>
    
