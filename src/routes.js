@@ -86,24 +86,17 @@ export let TeacherRoutes = [
   {
     path: "/upload",
     name: "ارسال تکلیف جدید",
-    icon: "nc-icon nc-diamond",
+    icon: "nc-icon nc-cloud-upload-94",
     component: TeacherHomeWorkManagment,
     layout: "/teacher"
   },
   {
     path: "/download",
     name: "لیست تکالیف کاروندان",
-    icon: "nc-icon nc-pin-3",
+    icon: "nc-icon nc-bullet-list-67",
     component: DownloadTecherHomeWorks,
     layout: "/teacher"
-  },
-  {
-    path: "/notifications",
-    name: "لیست نمرات",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/teacher"
-  },
+  }
 
 ]
 export let StudentRoutes = [
@@ -117,24 +110,17 @@ export let StudentRoutes = [
   {
     path: "/posthomework",
     name: "ارسال تکلیف جدید",
-    icon: "nc-icon nc-diamond",
+    icon: "nc-icon nc-cloud-upload-94",
     component: PostHomeWork,
     layout: "/student"
   },
   {
     path: "/downloadhomework",
     name: "دریافت تکالیف",
-    icon: "nc-icon nc-pin-3",
+    icon: "nc-icon nc-cloud-download-93",
     component: DownloadHomeWorks,
     layout: "/student"
-  },
-  {
-    path: "/notifications",
-    name: "نمرات",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/student"
-  },
+  }
 ]
 
 export let LoginRoute = {
