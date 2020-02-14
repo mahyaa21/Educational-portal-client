@@ -3,18 +3,28 @@ import { GET_ERRORS, SET_CURRENT_USER , SET_COURSE } from './type';
 import setAuthToken from '../../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
-export const registerUser = (user,history) => dispatch => {
+export const registerUser = (user,history,courseUser) => dispatch => {
     console.log(user)
     axios.post('http://localhost:3000/api/users/register', user)
-            .then(res => {
-                 alert('کاربر با موفقیت ثبت نام شد');
-                 console.log(res.status);
-                if(res.status === 200){
-                    dispatch(setCourse('Ok'))
-                }else{
-                    dispatch(setCourse('Nok'))
-                } 
-
+        .then(res => {
+            alert('کاربر با موفقیت ثبت نام شد');
+            console.log(res.status);
+            if (res.status === 200) {
+                dispatch(setCourse('Ok'))
+            } else {
+                dispatch(setCourse('Nok'))
+            }
+            if (user.role === 'کاروند') {
+                axios(`http://localhost:3000/api/users/courses-user/create`,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(courseUser)
+                })
+                    .then(res => res)
+                    .catch(err => console.log(err))
+            }
         })
             .catch(err => {
                 dispatch({
@@ -33,12 +43,7 @@ export const loginUser = (user,history) => dispatch => {
                 setAuthToken(token);
                 const decoded = jwt_decode(token);
                 dispatch(setCurrentUser(decoded));
-                //const {role} = this.props.auth.user
-                //debugger
-                // console.log(history)
-                // console.log(res.data)
-                // console.log(role)
-            //    debugger
+
                 switch(role){
                     
                     case 'کاروند':

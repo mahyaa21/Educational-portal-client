@@ -139,7 +139,7 @@ return <><Row style={{ textAlign: 'right' }}>
                   {homeworks.map(homework=>{
                   return <tr key={homework.id}>
                     <td>{homework.name}</td>
-                    <td>{homework.date}</td>
+                    <td>{homework.date && moment(homework.date, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
                   </tr>
               })}              
                   </tbody>

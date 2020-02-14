@@ -18,6 +18,7 @@
 */
 import React from "react";
 import { withApiClient } from '../../services/withApiCLient';
+import moment from 'jalali-moment';
 // reactstrap components
 import {
     Card,
@@ -63,7 +64,7 @@ class courseInfo extends React.Component {
                                     <ul className="course-info">
                                         <li>نام دوره : <span>{this.props.course.name}</span></li>
                                         <li>نام مدرس : <span>{this.props.teacher.name}</span></li>
-                                        <li>تاریخ برگزاری : <span>{this.props.course.date}</span></li>
+                                        <li>تاریخ برگزاری : <span>{moment(this.props.course.date, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</span></li>
                                         <li><Button color="danger" onClick={()=>this.finishCourse(this.props.course._id)}>اتمام دوره</Button></li>
                                     </ul>
                                 </CardBody>

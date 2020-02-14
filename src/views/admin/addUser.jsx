@@ -105,8 +105,8 @@ class addUser extends React.Component {
             course: this.state.course
         }
         
-        this.props.registerUser(user,this.props.history);
-        this.getAllUser()
+        this.props.registerUser(user,this.props.history,courseUser);
+        this.getAllUser();
         if (this.state.role === 'کاروند') {
             this.props.apiClient.RegisterCourseUser(courseUser)
                 .then(res => {
@@ -251,7 +251,7 @@ class addUser extends React.Component {
                                                         <label>انتخاب نام دوره</label>
                                                         <Input type="select" name="course" id="course" onChange={this.handleInputChange}>
 
-                                                            <option>--انتخاب سمت--</option>
+                                                            <option>--انتخاب دوره--</option>
                                                             {this.state.courses.map(course => {
                                                                 return <option value={course.id}>{course.name}</option>
                                                             })}

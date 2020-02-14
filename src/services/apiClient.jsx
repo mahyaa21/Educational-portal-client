@@ -117,16 +117,7 @@ export const apiClient = {
     //rgister course user
     RegisterCourseUser(courseUser) {
         return new Promise((resolve,reject) => {
-            Axios(`http://localhost:3000/api/users/courses-user/create`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: JSON.stringify(courseUser)
-            })
-                .then(res => res)
-                .then(resolve)
-                .catch(err => err)
+            
 
         })
     },

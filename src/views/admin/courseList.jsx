@@ -68,15 +68,6 @@ class CourseList extends React.Component {
             course: course,
             showClass: !this.state.showClass
         })
-        this.props.apiClient.getNotStudentCourse(course._id)
-            .then(res => {
-                this.setState({
-                    NotMember: res
-                })
-            })
-            .catch(err => {
-            console.log(err)
-        })
         this.props.apiClient.getCourseTeacher(course._id)
             .then(res => {
                 this.setState({
@@ -94,7 +85,8 @@ class CourseList extends React.Component {
             })
             .catch(err => {
             console.log(err)
-        })
+            })
+        console.log("members",this.state.courseMembers);
     }
     goBack = () => {
         this.setState({
@@ -118,7 +110,7 @@ class CourseList extends React.Component {
                                     <CardTitle tag="h4">لیست دوره ها</CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Table responsive>
+                                    <Table responsive style={{ OverFlow:'hidden' }}>
                                         <thead className="text-primary">
                                             <tr>
                                                 <th>نام دوره</th>

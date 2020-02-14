@@ -33,7 +33,7 @@ import Typography from "views/teacher/Typography.jsx";
 import TableList from "views/teacher/Tables.jsx";
 import DownloadTecherHomeWorks from "views/teacher/DownloadTecherHomeWorks.jsx";
 import UserPage from "views/teacher/User.jsx";
-import TeacherSearchCourse from 'views/teacher/SearchCourse.jsx';
+import TeacherHomeWorkManagment from 'views/teacher/HomeWorkManagment.jsx';
 import LoginPage from "views/login/login.jsx";
 //student routes address
 import PostHomeWork from 'views/student/PostHomeWork.jsx';
@@ -87,7 +87,7 @@ export let TeacherRoutes = [
     path: "/upload",
     name: "ارسال تکلیف جدید",
     icon: "nc-icon nc-diamond",
-    component: TeacherSearchCourse,
+    component: TeacherHomeWorkManagment,
     layout: "/teacher"
   },
   {

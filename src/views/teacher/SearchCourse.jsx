@@ -36,46 +36,52 @@ import {
     Row,
     Col
 } from "reactstrap";
-
+import axios from 'axios';
 class SearchCourse extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             TeacherCourses: [],
-            selectedCourse: ''
+            course: '',
+            homeworks: [],
+            courseId:''
         }
     }
 
     handleInputChange = (e) => {
+      
         console.log(e.target)
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         })
+        this.props.setSelectedcourse(e.target.value)
     }
 
+  
+  
     componentDidMount() {
-
         this.props.apiClient.getTeacherCourses(this.props.auth.user.id)
-            .then(res => {
-                this.setState({
-                    TeacherCourses: [...res.data]
-                })
+        .then(res => {
+            this.setState({
+                TeacherCourses: [...res.data]
             })
-            .catch(err => {
-                console.log(err);
-            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        
     }
 
     render() {
         return (
-         
-                <div className="content" >
-                     <Row className='m-0'>
-                        <Col md="4" sm="8" className=" m-auto">
+
+                     <Row className='m-0 w-100'>
+                    <Col md="4" sm="8" className=" m-auto">
+                        <Form onSubmit={this.props.submitCourse}>
                             <FormGroup>
                                 <label>انتخاب نام دوره</label>
-                                <Input type="select" name="selectedCourse" id="course" onChange={this.handleInputChange}>
+                                <Input type="select" name="course" id="course" onChange={this.handleInputChange}>
 
                                     <option>--انتخاب دوره--</option>
                                     {this.state.TeacherCourses.map(course => {
@@ -83,10 +89,12 @@ class SearchCourse extends React.Component {
                                     })}
                                 </Input>
                             </FormGroup>
+                            <Button type='submit'>جستجو</Button>
+                            </Form>
                         </Col>
-                    </Row>
-                {this.state.selectedCourse && <HomeWorkManagment course={this.state.selectedCourse}/>}
-                </div>
+                    
+                {/* {this.state.course && <HomeWorkManagment homeworks={this.state.homeworks} uploadHomeworkNow={this.uploadHomeworkNow}/>} */}
+                </Row>
            
         );
     }
