@@ -21,12 +21,13 @@ import { withApiClient } from '../../services/withApiCLient';
 import moment from 'jalali-moment';
 // import './teacher.scss';
 
-class HomeWorkManagment extends Component {
+class PostHomeWork extends Component {
 constructor(props) {
   super(props);
   this.state = {
     selectedFile: null,
-    homeworks: []  
+    homeworks: [],
+    studentCourse: {}
   }
 
 }
@@ -67,23 +68,6 @@ onChangeHandler = event => {
                 .then(err => {
                 console.log(err)
             })
-      // axios.post("/api/users/upload", data , {
-      //     // receive two    parameter endpoint url ,form data 
-      //         headers: {
-      //             fileName: selectedFile.name,
-      //             user: this.props.auth.user.id
-      //         }    
-      // })
-      //     .then(res => { // then print response status
-
-      //         if (res.status === 'Ok'){
-      //             this.setState({
-      //                 result: true
-      //             })
-      //         }
-      //         console.log(res.statusText)
-      //         alert('upload successfully!');
-      //     })
 
   }
 componentDidMount() {
@@ -109,7 +93,6 @@ componentWillMount(){
          id: this.props.auth.user.id,
         
        },
-      //  data: course
     }
   ).then(res => {
     console.log('homeworkssss:' + res)
@@ -118,15 +101,27 @@ componentWillMount(){
     console.log("homeworks request is not res bcz"+ err)
   })
    console.log('homeworks:' + this.state.homeworks)
-    
+      
+    axios.get(`http://localhost:3000/api/users/courses/getcourse/name/${course.course}`)
+      .then(res => {
+        this.setState({
+          studentCourse: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err);
+  })
+  
 }
 
 showHomeworks = () =>{
   const {homeworks} = this.state;
 return <><Row style={{ textAlign: 'right' }}>
-                <Col md="12">
+                <Col md="6" className="m-auto">
     <Card>
-      <CardHeader>تکالیف آپلود شده</CardHeader>
+      <CardHeader>
+        <CardTitle tag="h5">تکالیف آپلود شده</CardTitle>
+      </CardHeader>
               <CardBody>
                 <Table responsive>
                   <thead className="text-primary">
@@ -158,9 +153,20 @@ render() {
 
   return <div className='content'>
 
-    <input type="file" style={{ width: '70%', }} name="file" onChange={this.onChangeHandler} />
-    <button type="button" style={{ width: '70%', }} className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-
+    <Row>
+      <Col sm="6" className="m-auto">
+        <Card>
+          <CardHeader style={{ textAlign: 'right' }}>
+            <CardTitle tag="h5">{this.state.studentCourse.name}</CardTitle>
+            <CardTitle tag="p">.تکالیف خود را آپلود کنید</CardTitle>
+            </CardHeader>
+          <CardBody>
+            <input type="file" style={{ width: '50%', }} name="file" onChange={this.onChangeHandler} />
+            <button type="button" style={{ width: '50%',}} className="btn btn-success btn-block" onClick={this.onClickHandler}>آپلود</button>
+            </CardBody>
+          </Card>
+    </Col>
+    </Row>
     {this.state.homeworks && this.showHomeworks()}
 
   </div>
@@ -170,8 +176,7 @@ render() {
 
 
 
-HomeWorkManagment.propTypes = {
-//TeacherUser: PropTypes.func.isRequired,
+PostHomeWork.propTypes = {
 auth: PropTypes.object.isRequired
 };
 
@@ -180,4 +185,4 @@ errors: state.errors,
 auth: state.auth
 });
 
-export default connect(mapStateToProps)(withApiClient(withRouter(HomeWorkManagment)));
+export default connect(mapStateToProps)(withApiClient(withRouter(PostHomeWork)));

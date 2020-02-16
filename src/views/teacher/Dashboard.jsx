@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
     return (
       <>
         <div className="content">
-          <Row>
+          {/* <Row>
             <Col lg="3" md="6" sm="6">
               <Card className="card-stats">
                 <CardBody>
@@ -170,9 +170,9 @@ class Dashboard extends React.Component {
                 </CardFooter>
               </Card>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
-            <Col md="4">
+            {/* <Col md="4">
               <Card>
                 <CardHeader>
                   <CardTitle tag="h5">Email Statistics</CardTitle>
@@ -197,11 +197,11 @@ class Dashboard extends React.Component {
                   </div>
                 </CardFooter>
               </Card>
-            </Col>
-            <Col md="8">
+            </Col> */}
+            <Col md="8" className="m-auto">
               <Card className="card-chart">
                 <CardHeader>
-                  <CardTitle tag="h5">NASDAQ: AAPL</CardTitle>
+                  <CardTitle tag="h5">نمودار پیشرفت تحصیلی</CardTitle>
                   <p className="card-category">Line Chart with Points</p>
                 </CardHeader>
                 <CardBody>
@@ -214,13 +214,13 @@ class Dashboard extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <div className="chart-legend">
-                    <i className="fa fa-circle text-info" /> Tesla Model S{" "}
-                    <i className="fa fa-circle text-warning" /> BMW 5 Series
+                    <i className="fa fa-circle text-info" /> کلاس الف{" "}
+                    <i className="fa fa-circle text-warning" /> کلاس ب
                   </div>
-                  <hr />
+                  {/* <hr />
                   <div className="card-stats">
                     <i className="fa fa-check" /> Data information certified
-                  </div>
+                  </div> */}
                 </CardFooter>
               </Card>
             </Col>

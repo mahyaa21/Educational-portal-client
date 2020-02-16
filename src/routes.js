@@ -38,7 +38,7 @@ import LoginPage from "views/login/login.jsx";
 //student routes address
 import PostHomeWork from 'views/student/PostHomeWork.jsx';
 import DownloadHomeWorks from 'views/student/DownloadHomeWorks.jsx'
-// import Dashboard from "views/student/Dashboard.jsx";
+import StudentDashboard from "views/student/Dashboard.jsx";
 // import Notifications from "views/student/Notifications.jsx";
 // import Icons from "views/student/Icons.jsx";
 // import Typography from "views/student/Typography.jsx";
@@ -50,7 +50,7 @@ export let AdminRoutes = [
     path: "/dashboard",
     name: "داشبورد",
     icon: "nc-icon nc-bank",
-    component: Dashboard,
+    component: AdminDashboard,
     layout: "/admin"
   },
   {
@@ -104,7 +104,7 @@ export let StudentRoutes = [
     path: "/dashboard",
     name: "داشبورد",
     icon: "nc-icon nc-bank",
-    component: Dashboard,
+    component: StudentDashboard,
     layout: "/student"
   },
   {

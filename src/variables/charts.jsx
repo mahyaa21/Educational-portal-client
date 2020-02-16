@@ -169,22 +169,22 @@ const dashboardEmailStatisticsChart = {
 const dashboardNASDAQChart = {
   data: {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
+      "فروردین",
+      "اردیبهشت",
+      "خرداد",
+      "تیر",
+      "مرداد",
+      "شهریور",
+      "مهر",
+      "آبان",
+      "آذر",
+      "دی",
+      "بهمن",
+      "اسفند"
     ],
     datasets: [
       {
-        data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+        data: [0, 10,20,30,40,50,60,70,80,90,100],
         fill: false,
         borderColor: "#fbc658",
         backgroundColor: "transparent",

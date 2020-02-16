@@ -72,7 +72,7 @@ class DownloadHomework extends Component {
         return <>
             <div className="content">
             <Row>
-                <Col md="12">
+                <Col md="8" className="m-auto">
                     <Card>
                     <CardHeader>
                   <CardTitle tag="h4">دانلود تکالیف</CardTitle>
@@ -91,8 +91,9 @@ class DownloadHomework extends Component {
 
                                             <td>
                                                 {homeWork.name}</td>
-                                            <td><button
+                                            <td><Button
                                                 type="button"
+                                                color="success"
                                                 onClick={async () => {
                                                     const res = await fetch('http://localhost:3000/api/users/download',{
                                                         headers: {
@@ -103,7 +104,7 @@ class DownloadHomework extends Component {
                                                     download(blob,homeWork.name);
                                                     // filedownload(blob,'test.rar')
                                                 }}
-                                            >Download</button></td>
+                                            >دانلود</Button></td>
 
                                         </tr>
                                     })}
