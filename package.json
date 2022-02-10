@@ -12,7 +12,7 @@
     "jalali-moment": "^3.3.3",
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.25.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "perfect-scrollbar": "1.4.0",
     "react": "16.8.6",
     "react-chartjs-2": "2.7.6",
